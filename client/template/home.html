@@ -1,0 +1,212 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+ 	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+	<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <a href="#">PROFILE</a>
+  <a href="#">REMINDER</a>
+  <a href="#">DELETE</a>
+  <a href="#"></a>
+ </div>
+
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+  </div>
+
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="sample"><a href="">ToDo App</a></li>
+
+         <form class="navbar-form navbar-left">
+      <div class="form-group ">
+        <input type="text" class="form-control" placeholder="Search">
+        <!-- <i class="glyphicon glyphicon-search"></i> -->
+      </div>
+  </form>
+
+    <!-- <div class="btn-group">
+      <a href="#" id="list" class="btn btn-default btn-sm">
+     <span class="glyphicon glyphicon-th-list"> </span>List</a>
+     <a href="#" id="grid" class="btn btn-default btn-sm">
+     <span class="glyphicon glyphicon-th"></span>Grid</a></li>
+     </div> -->
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <button id="list"  type="button" class="btn btn-warning glyphicon"
+							ng-click="isList = !isList"
+							ng-class="{'glyphicon-list': !isList, 'glyphicon-th-large': isList}"
+							style="margin-top: 10px"></button>
+      <!-- <li><a href="#" id="list" ><span class="glyphicon glyphicon-list"></span> List</a></li> -->
+      <!-- <li><a href="#" id="grid" ><span class="glyphicon glyphicon-th-list"></span> Grid</a></li> -->
+      <li><a ui-sref="logout" id="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+    </ul>
+    <!--
+      <ul class="nav navbar-nav navbar-right">
+<li><a ui-sref="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <li><a ui-sref="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+
+      </ul> -->
+    </div>
+  </div>
+</nav>
+
+<!--
+ <div class='row text-center'>
+     <div class='col-sm-4 col-sm-offset-4'>
+         <h1>Add a todo</h1>
+         <input type="text" ng-model="newTodo.title" placeholder="title" class='form-control' />
+         <textarea name="textarea" class="form-control" rows="4" ng-model="newTodo.description" placeholder="description"></textarea>
+         <button class='btn btn-success btn-lg' ng-click="createTodo()">Add</button>
+     </div>
+ </div>  -->
+
+
+ <div class="container">
+   <div class="panel-group">
+     <div class="panel panel-default" >
+       <div class="panel-heading">
+         <h4 class="panel-title">
+           <a data-toggle="collapse" href="#collapse1"> <input type="text" style="border:none;" ng-model="newTodo.title" placeholder="title" class="form-control"></a>
+         </h4>
+       </div>
+
+       <div id="collapse1" class="panel-collapse collapse">
+         <div class="panel-body"><input type="text-box" style="border:none;" rows="4" ng-model="newTodo.description" placeholder="description"  class="form-control" contenteditable="true">
+          <!-- <div class="panel-footer"> -->
+         <label id="add" ng-click="createTodo()">Done</label>
+<!-- </div> -->
+       </div>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+
+<!--
+ <div class='row text-center' ng-init="readTodo()" >
+     <div class='col-sm-4 col-sm-offset-4'  ng-repeat ="todo in todos">
+         <div class ="sample1">
+           <span class="title">{{todo.title}}</span>
+           <span class="description">{{todo.description}}</span>
+             <a ui-sref=" "><span class="glyphicon glyphicon-trash" ng-click="deleteTodo(todo.t_id)"></span></a>
+             <a ui-sref=" "><span class="glyphicon glyphicon-pencil" ng-click="updateTodo(todo.t_id)" ></span></a>
+         </div>
+     </div>
+ </div> -->
+
+<!-- list and grid -->
+  <!-- <div class="container" ng-init="readTodo()" >
+    <div id="products" class="row list-group">
+        <div class="item col-xs-6 col-lg-4 col-sm-6" ng-repeat ="todo in todos" >
+            <!-- <div class="thumbnail">
+                <img class="group list-group-image" src="http://placehold.it/400x250/000/fff" alt="" /> -->
+                <!-- <div class="jumbotron">
+                    <h4 class="group inner list-group-item-heading">
+                      <div class="title" aria-multiline="true" role="textbox">{{todo.title}}</div></h4>
+                    <p class="group inner list-group-item-text">
+                      <div class="description" >{{todo.description}}</div></p>
+                    <div class="row">
+                        <span class="col-xs-12 col-md-12">
+                        <a ui-sref=" "><span class="glyphicon glyphicon-trash lead"  id="trash" ng-click="deleteTodo(todo.t_id)"></span></a>
+                         <!-- <span class="col-xs-10 col-md-10"> -->
+                          <!-- <a ui-sref=" "><span class="glyphicon glyphicon-pencil lead" id="pencil"  ng-click="updateTodo(todo.t_id)" contenteditable="true;"></span></a>
+                          </span>
+                    </div>
+</div>
+</div>
+</div>
+</div> -->
+
+
+
+<div class="cont" ng-init="readTodo()"  ng-class="{list: isList, grid: !isList}">
+		<div class="cardRow" >
+			<div class="card"
+				ng-class="{'col-xs-6':!isList, 'col-md-4':!isList, 'col-sm-4':!isList,'col-lg-3':!isList}"
+				ng-repeat="todo in todos " style="border:1px solid; overflow:hidden; text-overflow:ellipsis" >
+				<div class="slideDown card-4 " multiline="true">
+					<h3 >{{todo.title}}</h3>
+					<div multiline="true" >{{todo.description}}</div>
+					<div style="padding-top: 10px">
+            <div class="row">
+                <span class="col-xs-12 col-md-12">
+                <a ui-sref=" "><span class="glyphicon glyphicon-trash lead"  id="trash" ng-click="deleteTodo(todo.t_id)"></span></a>
+                 <!-- <span class="col-xs-10 col-md-10">  -->
+                   <a ui-sref=" "><span class="glyphicon glyphicon-pencil lead" id="pencil"  data-toggle="modal" data-target=".modal" data-paragraphs="10"contenteditable="true;"></span></a>
+                  </span>
+						<!-- <button data-ng-click="tdctl.deleteTask(x.id)">delete</button>-->
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+  <!-- Modal's toggle button has data that's used to determine what content to use -->
+  <!-- <button type="button" class="btn btn-lg btn-success" data-toggle="modal" data-target=".modal" data-paragraphs="10">Go</button> -->
+
+  <!-- Taken from Bootstrap's documentation -->
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" contenteditable="true">Modal title</h4>
+        </div>
+        <div class="modal-body" contenteditable="true">
+          <p>One fine body&hellip;</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+}
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
+
+$(document).ready(function() {
+    $('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
+    $('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
+});
+
+
+var $modal = $('.modal');
+
+// Show loader & then get content when modal is shown
+$modal.on('show.bs.modal', function(e) {
+  var paragraphs = $(e.relatedTarget).data('paragraphs');
+
+  $(this)
+    .addClass('modal-scrollfix')
+    .find('.modal-body')
+    .html('loading...')
+    .load('readTodo1(todo.t_id)' + paragraphs, function() {
+      // Use Bootstrap's built-in function to fix scrolling (to no avail)
+      $modal
+        .removeClass('modal-scrollfix')
+        .modal('handleUpdate');
+    });
+});
+</script>

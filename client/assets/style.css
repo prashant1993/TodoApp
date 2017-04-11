@@ -1,0 +1,415 @@
+body{
+  background-color: #FFFFE0;
+
+}
+
+.container-fluid{
+  background-color: orange;
+
+}
+
+/*login and signup*/
+@media (min-width: 768px) {
+   .omb_row-sm-offset-3 div:first-child[class*="col-"] {
+       margin-left: 25%;
+   }
+}
+.omb_login .omb_authTitle {
+   text-align: center;
+ line-height: 300%;
+ color:black;
+}
+
+.omb_login .omb_socialButtons a {
+ color: white; // In yourUse @body-bg
+ opacity:0.9;
+}
+.omb_login .omb_socialButtons a:hover {
+   color: white;
+ opacity:1;
+}
+
+.omb_login .omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+/*.omb_login .omb_socialButtons .omb_btn-twitter {background: #00aced;}*/
+.omb_login .omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+
+.omb_login .omb_loginOr {
+ position: relative;
+ font-size: 1.5em;
+ color: #aaa;
+ margin-top: 1em;
+ margin-bottom: 1em;
+ padding-top: 0.5em;
+ padding-bottom: 0.5em;
+}
+.omb_login .omb_loginOr .omb_hrOr {
+ background-color: #cdcdcd;
+ height: 1px;
+ margin-top: 0px !important;
+ margin-bottom: 0px !important;
+}
+.omb_login .omb_loginOr .omb_spanOr {
+ display: block;
+ position: absolute;
+ left: 50%;
+ top: -0.6em;
+ margin-left: -1.5em;
+ background-color: white;
+ width: 3em;
+ text-align: center;
+}
+
+.omb_login .omb_loginForm .input-group.i {
+ width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+   color: red;
+}
+
+
+@media (min-width: 768px) {
+   .omb_login .omb_forgotPwd {
+       text-align: right;
+   margin-top:10px;
+ }
+}
+
+.panel-group{
+  margin-top: 80px;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+.addDetail{
+float: right;
+width: 60px;
+height:60px;
+}
+
+
+#add {
+float: right;
+}
+  #grid , #list , #logout {
+color: black;
+}
+/*home.html*/
+/*sidenav*/
+.sidenav {
+
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 52px;
+    left: 0;
+    background-color: orange;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: black;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px; }
+  .sidenav a {font-size: 18px;}
+}
+
+
+.title{
+font-weight: bold;
+font-size: 20px;
+overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.description{
+  font-style: italic;
+  font-size: 20px;
+  overflow: hidden;
+     text-overflow: ellipsis;
+  /*margin-right: 10px;*/
+
+}
+.sample1{
+border:2px;
+background-color: white;
+display: inline;
+margin: 10px;
+}
+
+/*list and grid*/
+.glyphicon { margin-right:5px; }
+.thumbnail
+{
+    /*margin-bottom: 20px;*/
+    padding: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+/*.container{
+  margin-top: 80px;
+}*/
+  .item.list-group-item{
+    float: none;
+    width: 100%;
+    background-color:#FFFFE0;
+    border: none;
+
+    /*margin-bottom: 5px;*/
+}
+/*.panel-group{
+  margin-top: 80px;
+}*/
+/*.item.list-group-item:nth-of-type(odd):hover,.item.list-group-item:hover
+{
+    background: #428bca;
+}*/
+/*
+.item.list-group-item .list-group-image
+{
+    margin-right: 10px;
+}
+.item.list-group-item .thumbnail
+{
+    margin-bottom: 0px;
+}*/
+/*.item.list-group-item .caption
+{
+    padding: 9px 9px 0px 9px;
+}*/
+/*.item.list-group-item:nth-of-type(odd)
+{
+    background: #eeeeee;
+}*/
+
+.item.list-group-item:before, .item.list-group-item:after
+{
+    display: table;
+    content: " ";
+}
+
+/*.item.list-group-item img
+{
+    float: left;
+}*/
+.item.list-group-item:after
+{
+    clear: both;
+    overflow: hidden;
+       text-overflow: ellipsis;
+}
+
+
+.list-group-item-text
+{
+    margin: 0 0 11px;
+}
+
+#add{
+  margin-top: 10px;
+  color: black;
+}
+
+#add:hover{
+  background-color:#FFFFE0;
+}
+#trash
+{
+  /*float:right;*/
+  bottom:0px;
+  color: black;
+padding-left: 10px;
+}
+
+.panel-group{
+  color:transparent;
+}
+
+#pencil{
+  /*float:right;*/
+  bottom:0px;
+  padding-left: 10px;
+  color: black;
+}
+.caption
+{
+  border:1px solid black;
+  margin;10px;
+}
+
+.jumbotron{
+border: 1px solid black;
+height: auto;
+ white-space: nowrap;
+
+/*box-shadow:10px 10px 5px #888888;*/
+}
+.jumbotron:hover{
+/*border: 1px solid black;*/
+box-shadow:10px 10px 5px #888888;
+
+}
+
+
+
+
+/*
+.app {
+  background: #000;
+  width: 980px;
+  padding: 20px;
+  margin: 0 auto;
+}*/
+
+/*span{
+  padding-left: 350px;
+}*/
+.cont .cardRow {
+  display: table;
+  width: 100%;
+  padding: 20px;
+  margin-right: 10px;
+  /*box-shadow:10px 10px 5px #888888;*/
+}
+.cont.list .card:hover{
+    box-shadow:10px 10px 5px #888888;
+}
+.cont.list .card {
+  /*display: table-row;*/
+  background: #fff;
+  margin: 20px;
+  width: 80%;
+  margin-right: 30%;
+/*padding-bottom: 20px;*/
+}
+.cont.list .card > div {
+  display: table-cell;
+  /*vertical-align: middle;*/
+  padding: 20px;
+  margin-bottom: 10%;
+  /*border-bottom: 1px solid #000;*/
+  /*margin-bottom: 10%;*/
+
+}
+/*.cont.list .card .imgBox .img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: -4px;
+  width: 100px;
+  height: 80px;
+  background-size: cover;
+  background-position: 50% 50%;
+}*/
+/*.cont.list .card .title h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+.cont.list .card .title span {
+  text-transform: uppercase;
+}*/
+/*.cont.list .card .stakes h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+.cont.list .card .stakes span {
+  text-transform: uppercase;
+}*/
+/*.cont.list .card .jackpot h4 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+.cont.list .card .jackpot span {
+  text-transform: uppercase;
+}*/
+/*.cont.list .card .buttons {
+  text-align: right;
+}*/
+/*.cont.list .card .buttons button {
+  margin-bottom: 10px;
+}
+.cont.grid {
+  margin-right: -20px;
+}*/
+.cont.grid .card:hover{
+  box-shadow:10px 10px 5px #888888;
+}
+.cont.grid .card {
+  display: table-cell;
+  background: #fff;
+  padding: 10px;
+  margin: 10px;
+
+  /*border: 2px solid #000;*/
+}
+/*.cont.grid .card > div {
+  position: relative;
+}*/
+/*.cont.grid .card .imgBox {
+  border-bottom: 5px solid #444;
+}
+.cont.grid .card .imgBox .img {
+  padding: 100% 0 0;
+  background-size: cover;
+  background-position: 50% 50%;
+}*/
+/*.cont.grid .card .title h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}*/
+/*.cont.grid .card .title span {
+  display: block;
+  padding: 0 5px;
+  width: 100%;
+  position: absolute;
+  top: -150%;
+  background: #777;
+  color: #fff;
+  text-transform: uppercase;
+}*/
+/*.cont.grid .card .stakes {
+  display: none;
+}*/
+/*.cont.grid .card .jackpot h4 {
+  display: inline;
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+.cont.grid .card .jackpot span {
+  display: inline;
+  text-transform: uppercase;
+}*/
+
+.cont{
+margin-left: 20%;
+ /*margin-right: 10%;*/
+}

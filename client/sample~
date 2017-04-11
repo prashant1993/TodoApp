@@ -1,0 +1,35 @@
+$http({
+    method : 'GET',
+    url : 'http://localhost:8080/myapplication/employees'
+}).then(function successCallback(response) {
+    $scope.employees = response.data.employees;
+}, function errorCallback(response) {
+    console.log(response.statusText);
+});
+
+
+
+$http({
+    method : "POST",
+    url : "employees",
+    data : angular.toJson($scope.form),
+    headers : {
+        'Content-Type' : 'application/json'
+    }
+}).then( _success, _error );
+
+
+$http({
+    method : "PUT",
+    url : "employees/" + $scope.form.id,
+    data : angular.toJson($scope.form),
+    headers : {
+        'Content-Type' : 'application/json'
+    }
+}).then( _success, _error );
+
+
+$http({
+    method : "DELETE",
+    url : "employees/" + employee.id
+}).then( _success, _error )

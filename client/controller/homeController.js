@@ -15,7 +15,7 @@
               $scope.readTodo1 = function(t_id) {
               $http.get('/todo/readTodo/',+ t_id,{headers:{"x-access-token":$auth.getToken}})
                       .success(function(data) {
-                              $scope.todos = data;
+                              $scope.todo = data;
                               console.log(data);
                       })
                       .error(function(data) {
@@ -58,4 +58,16 @@
                         });
         };
 
+
+        $scope.open = function() {
+          $scope.showModal = true;
+        };
+
+        $scope.ok = function() {
+          $scope.showModal = false;
+        };
+
+        $scope.cancel = function() {
+          $scope.showModal = false;
+        };
     });

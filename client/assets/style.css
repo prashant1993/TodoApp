@@ -1,5 +1,5 @@
 body{
-  background-color: #FFFFE0;
+  background-color: #e8e8e8;
 
 }
 
@@ -248,6 +248,7 @@ padding-left: 10px;
 
 .panel-group{
   color:transparent;
+  margin-left: 10%;
 }
 
 #pencil{
@@ -258,7 +259,7 @@ padding-left: 10px;
 }
 .caption
 {
-  border:1px solid black;
+  /*border:1px solid black;*/
   margin;10px;
 }
 
@@ -276,7 +277,15 @@ box-shadow:10px 10px 5px #888888;
 }
 
 
-
+#main{
+  display: block;
+  position: relative;
+  /*width: 80%;*/
+  /*margin-left:10%;*/
+  margin-right: none;
+   overflow: hidden;;
+height: 100%;
+}
 
 /*
 .app {
@@ -297,23 +306,23 @@ box-shadow:10px 10px 5px #888888;
   /*box-shadow:10px 10px 5px #888888;*/
 }
 .cont.list .card:hover{
-    box-shadow:10px 10px 5px #888888;
+    box-shadow:0 0 20px #888888;
 }
 .cont.list .card {
   /*display: table-row;*/
   background: #fff;
-  margin: 20px;
+  margin-bottom: 20px;
   width: 80%;
-  margin-right: 30%;
+  margin-right: 50%;
 /*padding-bottom: 20px;*/
 }
 .cont.list .card > div {
   display: table-cell;
-  /*vertical-align: middle;*/
+  vertical-align: middle;
   padding: 20px;
   margin-bottom: 10%;
   /*border-bottom: 1px solid #000;*/
-  /*margin-bottom: 10%;*/
+  margin-bottom: 10%;
 
 }
 /*.cont.list .card .imgBox .img {
@@ -359,19 +368,18 @@ box-shadow:10px 10px 5px #888888;
   margin-right: -20px;
 }*/
 .cont.grid .card:hover{
-  box-shadow:10px 10px 5px #888888;
+  box-shadow:0 0 20px  #888888;
 }
 .cont.grid .card {
   display: table-cell;
   background: #fff;
   padding: 10px;
   margin: 10px;
-
   /*border: 2px solid #000;*/
 }
-/*.cont.grid .card > div {
+.cont.grid .card > div {
   position: relative;
-}*/
+}
 /*.cont.grid .card .imgBox {
   border-bottom: 5px solid #444;
 }
@@ -410,6 +418,8 @@ box-shadow:10px 10px 5px #888888;
 }*/
 
 .cont{
-margin-left: 20%;
+/*margin-left: 20%;*/
+
  /*margin-right: 10%;*/
+ /*width: 100%;*/
 }

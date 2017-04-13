@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var todo = require('../../model/Tododb.js');
 
 /* PUT /todos/:id */
-router.put('/:id', function(req, res) {
+router.post('/:id', function(req, res) {
   todo.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

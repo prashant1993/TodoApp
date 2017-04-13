@@ -1,5 +1,5 @@
-var app = angular.module('myApp',['ui.router','satellizer']);
-app.config(['$stateProvider','$urlRouterProvider','$authProvider', function($stateProvider,$urlRouterProvider,$authProvider) {
+var app = angular.module('myApp',['ui.router','satellizer','ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+app.config(function($stateProvider,$urlRouterProvider,$authProvider) {
 
   /**
      * Helper auth functions
@@ -31,7 +31,7 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider', function($sta
     $authProvider.loginUrl = '/login';
     $authProvider.signupUrl = '/signup';
 
-    $urlRouterProvider.otherwise('/login');
+   $urlRouterProvider.otherwise('/login');
       $stateProvider
       .state('login', {
         url : '/login',
@@ -73,4 +73,4 @@ app.config(['$stateProvider','$urlRouterProvider','$authProvider', function($sta
      clientId: 'YOUR_GOOGLE_CLIENT_ID'
    });
 */
-    }]);
+    });

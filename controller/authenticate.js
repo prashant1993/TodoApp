@@ -6,16 +6,14 @@ var express = require('express'),
 
 // route middleware to verify a token
 router.use(function(req, res, next) {
-  console.log(req.isAuthenticated());
-  console.log(req.user);
+  // console.log(req.isAuthenticated());
+  // console.log(req.user);
 
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.query.token || req.headers['x-access-token'];
   console.log(token);
-
   // decode token
   if (token) {
-
     // verifies secret and checks exp
     jwt.verify(token, SECRET, function(err, decoded) {
       if (err) {

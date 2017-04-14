@@ -1,15 +1,16 @@
+<div class="modal-demo">
+    <!-- <div class="modal-header">
+        <div contenteditable ng-model="todo.title" strip-br="true" required></div>
+    </div>
+    <div class="modal-body" id="modal-body" contenteditable ng-model="todo.description" strip-br="true" required></div> -->
 
-  <div class="modal-demo">
-          <div class="modal-header">
-              <h3 class="modal-title" id="modal-title" contenteditable="true">{{item.title}}</h3>
+    <div class="modal-header">
+              <h3 class="modal-title" id="modal-title" contenteditable="true" role="textbox" ng-model="todo.title">{{todo.title}}</h3>
           </div>
-          <div class="modal-body" id="modal-body" contenteditable="true">
-              {{item.description}}
-          </div>
-          <div class="modal-footer">
-              <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-              <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-          </div>
-
-      <!-- <button type="button" class="btn btn-default" ng-click="$ctrl.open()">Open me!</button> -->
-  </div>
+          <div class="modal-body" id="modal-body" contenteditable="true" role="textbox" ng-model="todo.description">{{todo.description}}</div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="updateTodo(todo)">edit</button>
+        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    </div>
+</div>

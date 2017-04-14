@@ -2,7 +2,7 @@ app.controller('loginController' , function($scope,$http,$state,$auth){
 console.log("heeeeee");
 
 $scope.login = function() {
-  $auth.login($scope.user)
+  $auth.login($scope.user,{url:"/login",method:"POST"})
     .then(function(data) {
       console.log(data);
       // toastr.success('You have successfully signed in!');
@@ -16,7 +16,7 @@ $scope.login = function() {
     });
 };
 
-$scope.loginProvider=function(provider){
+$scope.loginProvider = function(provider){
   $http({"method":"get","url":"http://localhost:8088/auth/"+provider});
 };
 });

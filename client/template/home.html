@@ -1,104 +1,128 @@
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
+    <div class="container-fluid">
 
-    <div class="navbar-header">
- 	<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-	<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="navbar-header">
+            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-  <a href="#">PROFILE</a>
-  <a href="#">REMINDER</a>
-  <a href="#">DELETE</a>
-  <a href="#"></a>
- </div>
+                <a href="#">PROFILE</a>
+                <a href="#">REMINDER</a>
+                <a href="#">DELETE</a>
+                <a href="#"></a>
+            </div>
 
-       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-  </div>
+        </div>
 
 
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="sample"><a href="">ToDo App</a></li>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="sample"><a href="">ToDo App</a></li>
 
-         <form class="navbar-form navbar-left">
-      <div class="form-group ">
-        <input type="text" class="form-control" placeholder="Search">
-        <i class="glyphicon glyphicon-search"></i>
-      </div>
-  </form>
-      </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group ">
+                        <input type="text" class="form-control" placeholder="Search" ng-model="searchTodos" style="width:300px;background-color:orange;">
+                        <button class="btn btn-warning"><i class="glyphicon glyphicon-search" style="color:black;"></i></button>
+                    </div>
+                </form>
+            </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <button id="list"  type="button" class="btn btn-warning glyphicon"
-							ng-click="isList = !isList"
-							ng-class="{'glyphicon-list': !isList, 'glyphicon-th-large': isList}"
-							style="margin-top: 10px"></button>
-      <!-- <li><a href="#" id="list" ><span class="glyphicon glyphicon-list"></span> List</a></li> -->
-      <!-- <li><a href="#" id="grid" ><span class="glyphicon glyphicon-th-list"></span> Grid</a></li> -->
-      <li><a ui-sref="logout" id="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <ul class="nav navbar-nav navbar-right">
+                <button id="list" type="button" class="btn btn-warning glyphicon" ng-click="isList = !isList" ng-class="{'glyphicon-list': !isList, 'glyphicon-th-large': isList}" style="margin-top: 10px"></button>
+                <!-- <li><a href="#" id="list" ><span class="glyphicon glyphicon-list"></span> List</a></li> -->
+                <!-- <li><a href="#" id="grid" ><span class="glyphicon glyphicon-th-list"></span> Grid</a></li> -->
+                <li><a ui-sref="logout" id="logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 
-    </ul>
+            </ul>
 
+        </div>
     </div>
-  </div>
 </nav>
 
- <div class="container" id="main">
-   <div class="panel-group">
-     <div class="panel panel-default" >
-       <div class="panel-heading">
-         <h4 class="panel-title">
+<div class="container" id="main">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
            <a data-toggle="collapse"  href="#collapse1"> <input type="text" style="border:none;" ng-model="newTodo.title" placeholder="title" class="form-control"></a>
          </h4>
-       </div>
-       <div id="collapse1" class="panel-collapse collapse">
-         <div class="panel-body"><input type="text-box" style="border:none;" rows="4" ng-model="newTodo.description" placeholder="description"  class="form-control" contenteditable="true">
-           <label id="add" ng-click="createTodo()">Done</label>
-       </div>
-       </div>
-     </div>
-   </div>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body"><input type="text-box" rows="4" multiline="true" style="border:none;" rows="4" ng-model="newTodo.description" placeholder="description" class="form-control" contenteditable="true">
+                    <label id="date">Reminder:<input type="date"  style="border:none;" ng-model="newTodo.reminder" ></label>
+                    <label id="add" ng-click="createTodo()">Done</label>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="cont"   ng-init="readTodo()" ng-class="{list: isList, grid: !isList}" >
-		<div class="cardRow" >
-			<div class="card"
-				ng-class="{'col-xs-12':!isList, 'col-md-4':!isList, 'col-sm-4':!isList,'col-lg-3':!isList}"
-				ng-repeat="todo in todos">
-				<div class="slideDown card-4">
-					<h3 style="overflow: hidden; text-overflow: ellipsis;" ng-click="loadModel(todo)">{{todo.title}}</h3>
-					<div style="overflow: hidden; text-overflow: ellipsis;" ng-click="loadModel(todo)">{{todo.description}}</div>
-					<div style="padding-top: 10px margin-left:10px;">
-            <div class="row">
-                <span class="col-xs-12 col-md-12">
-                <a><span class="glyphicon glyphicon-trash lead"  id="trash" ng-click="deleteTodo(todo.t_id)"></span></a>
-                <a><span class="glyphicon glyphicon-pencil lead" id="pencil" ng-click="updateTodo(todo.t_id)"></span></a>
-              </span>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-</div>
+    <div class="cont" ng-init="readTodo()" ng-class="{list: isList, grid: !isList}">
+        <div class="cardRow">
+            <div class="card" ng-class="{'col-xs-12':!isList, 'col-md-4':!isList, 'col-sm-4':!isList,'col-lg-3':!isList}" ng-repeat="todo in todos | filter: searchTodos">
+                <div class="slideDown card-4">
+                    <h3 style="overflow: hidden; text-overflow: ellipsis;" ng-click="loadModel(todo)">{{todo.title}}</h3>
+                    <div style="overflow: hidden; text-overflow: ellipsis;" ng-click="loadModel(todo)">{{todo.description}}</div>
+                    <div style="padding-top: 10px margin-left:10px;">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12">
+                            <a><span class="glyphicon glyphicon-trash lead"  id="trash" ng-click="deleteTodo(todo.t_id)"></span></a>
+                            <a><span class="glyphicon glyphicon-pencil lead" id="pencil" ng-click="updateTodo(todo.t_id)"></span></a>
+                            <span>Reminder:{{todo.reminder | date}}</span>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+<div class="outer row ng-class="{list:isList, grid: !isList}" >
+                        <div class="item"
+                            ng-class="{'col-xs-12':!isList, 'col-md-6':!isList, 'col-sm-6':!isList,'col-lg-4':!isList}"
+                            ng-repeat="i in result |filter :searchtext track by $index ">
+                            <div class="card card-1 thumbnail"
+                                style="height: auto; width: 100%;">
+                                <div style="font-weight: bolder;" ng-hide="i.update">{{i.title}}</div>
+                                <div ng-show="i.update"
+                                    class="group list-group-image group inner list-group-item-heading titlediv">
+                                    <input style="border: none;" type="text"
+                                        data-ng-model="i.title" />
+                                </div>
+                                <div class="popclick" style="font-size: 22px; width: 100%;"
+                                    ng-hide="i.update" ng-click="load_modal_sms(i)">
+                                    <p>{{i.description}}</p>
+                                    <div class="popuptext">click to see</div>
+                                </div>
+                                <div class="group list-group-image titlediv" ng-show="i.update">
 
+                                    <textarea style="border: none; overflow-y:hidden;" type="text"
+                                        data-ng-model="i.description"></textarea>
+                                </div>
+                                <div align="right">
+                                    <h6>Edited on {{i.date | date }}</h6>
+                                </div>
+                                <button class="popuptext" type="button" ng-show="i.update"
+                                    data-ng-click="hc.updateTask($index, i.id)">Done</button>
+                                <button style="border:none;float:right;" type="button"
+                                    ng-hide="i.update" class="btn btn-default btn"
+                                    data-ng-click="hc.updateEnable($index)">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button style="border: none"; float: right;" type="button"
+                                    type="button" class="btn btn-default btn" ng-hide="i.update"
+                                    data-ng-click="hc.deleteTask(i.id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </div> -->
 
+    <script>
 
-
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "200px";
-    document.getElementById("main").style.marginLeft = "200px";
-}
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-}
-$(document).ready(function() {
-    $('#list').click(function(event){event.preventDefault();$('#products .item').addClass('list-group-item');});
-    $('#grid').click(function(event){event.preventDefault();$('#products .item').removeClass('list-group-item');$('#products .item').addClass('grid-group-item');});
-});
-</script>
+    </script>

@@ -72,6 +72,8 @@ body{
    .omb_login .omb_forgotPwd {
        text-align: right;
    margin-top:10px;
+   display: none!important;
+
  }
 }
 
@@ -246,9 +248,17 @@ margin: 10px;
 padding-left: 10px;
 }
 
+ .panel-default>.panel-heading {
+  background-color: white;
+ }
 .panel-group{
   color:transparent;
-  margin-left: 10%;
+  /*margin-left: 10%;*/
+}
+
+#date{
+  color:black;
+  margin-top: 5px;
 }
 
 #pencil{
@@ -279,9 +289,8 @@ box-shadow:10px 10px 5px #888888;
 
 #main{
   /*display: block;*/
-  /*position: relative;*/
-
-  /*margin-left:10%;*/
+  possition: fixed;;
+  margin-left:10%;
   margin-right: none;
    overflow: hidden;;
 /*height: 100%;*/
@@ -300,19 +309,21 @@ box-shadow:10px 10px 5px #888888;
 }*/
 .cont .cardRow {
   /*display: table;*/
+  /*position: fixed;*/
   width: 100%;
   padding: 20px;
   margin-right: 10px;
   /*box-shadow:10px 10px 5px #888888;*/
 }
 .cont.list .card:hover{
-    box-shadow:0 0 20px #888888;
+    box-shadow:0 0 25px #888888;
 }
 .cont.list .card {
   /*display: table-row;*/
   background:  #ffffff;
   margin-bottom: 20px;
-  width: 80%;
+  width: 70%;
+  box-shadow:0 0 10px #888888;
   /*margin-right: 50%;*/
   overflow: hidden;
   text-overflow: ellipsis;
@@ -371,11 +382,12 @@ box-shadow:10px 10px 5px #888888;
   margin-right: -20px;
 }*/
 .cont.grid .card:hover{
-  box-shadow:0 0 20px  #888888;
+  box-shadow:0 0 25px  #888888;
 }
 .cont.grid .card {
   display: table-cell;
   background:  #ffffff;
+    box-shadow:0 0 10px #888888;
   padding: 10px;
   margin: 10px;
   /*border: 2px solid #000;*/

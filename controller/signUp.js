@@ -1,6 +1,6 @@
 var Express = require("express");
 var apiRoutes = Express.Router();
-var User = require("../model/signUp");
+var User = require("../model/user");
 var validator = require('express-validator');
 
 apiRoutes.post("/", function(req, res) {

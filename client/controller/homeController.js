@@ -1,16 +1,15 @@
 
     app.controller('homeController', function($scope, $http , $auth,$uibModal,$log) {
         $scope.newTodo = {};
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "200px";
-            document.getElementById("main").style.marginLeft = "200px";
-        }
-
-        function closeNav() {
+         openNav = function() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        };
+         closeNav = function() {
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("main").style.marginLeft = "0";
-        }
-        
+        };
+
         $(document).ready(function() {
             $('#list').click(function(event) {
                 event.preventDefault();
@@ -22,7 +21,10 @@
                 $('#products .item').addClass('grid-group-item');
             });
         });
-
+        // $("#menu-toggle").click(function(e) {
+        //         e.preventDefault();
+        //         $("#wrapper").toggleClass("toggled");
+        //     });
         // when landing on the page, get all todos and show them
         $scope.readTodo = function() {
         $http.get('/todo/readTodo',{headers:{"x-access-token":$auth.getToken}})
@@ -89,7 +91,7 @@
               };
 
               // $scope.updateTodo = function(todo) {
-              //   console.log("heeeeeee");
+              //   console.log(todo);
               //         $http.post('/todo/updateTodo/' + todo.t_id, {headers:{"x-access-token":$auth.getToken}})
               //                 .then(function(data) {
               //                         $scope.todo = data.data;

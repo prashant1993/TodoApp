@@ -1,6 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 // var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
-var User = require('../model/signUp');
+var User = require('../model/user');
 var googleConfig = require('../config/auth');
 var passport = require('passport');
 

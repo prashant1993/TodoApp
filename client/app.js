@@ -41,18 +41,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
                 skipIfLoggedIn: skipIfLoggedIn
             }
         })
-        // .state('facebook', {
-        //     url: '/facebook',
-        //     template: 'template/login.html',
-        //     controller: function($http) {
-        //         $http.get("/facebook/check", function(data) {
-        //             console.log(data);
-        //         });
-        //     },
-        //     resolve: {
-        //         skipIfLoggedIn: skipIfLoggedIn
-        //     }
-        // })
         .state('logout', {
             url: '/logout',
             template: null,
@@ -82,15 +70,4 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
             //   console.log();
             // }
         });
-    /**
-    *  Satellizer config
-
-   $authProvider.facebook({
-     clientId: 'YOUR_GOOGLE_CLIENT_ID'
-   });
-
-   $authProvider.google({
-     clientId: 'YOUR_GOOGLE_CLIENT_ID'
-   });
-*/
 });

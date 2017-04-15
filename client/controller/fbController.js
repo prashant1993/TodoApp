@@ -1,4 +1,4 @@
-app.controller('fbController' , function($scope,$http,$state){
+ app.controller('fbController' , function($scope,$http,$state){
 console.log("heeeeee");
 
 function successCallback(data, status, headers, config) {

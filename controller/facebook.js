@@ -1,8 +1,8 @@
 var FacebookStrategy = require('passport-facebook').Strategy;
-var User = require('../model/signUp');
+var User = require('../model/user');
 var fbConfig = require('../config/auth');
 var passport = require('passport');
-var oauth = require('oauthio');
+// var oauth = require('oauthio');
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -42,7 +42,7 @@ module.exports = function(passport) {
                     newUser.fb.firstName = profile.name.givenName;
                     newUser.fb.lastName = profile.name.familyName; // look at the passport user profile to see how names are returned
                     newUser.fb.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
-                    newUser.google.profile = profile.picture;
+                    newUser.fb.profile = profile.picture;
                     // save our user to the database
                     newUser.save(function(err) {
                         if (err)

@@ -1,7 +1,7 @@
 var express = require("express");
 var apiRoutes = express.Router();
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var config=require("../config/config");
+var config = require("../config/config");
 var SECRET = new config().secret; // creating object of class config
 
 apiRoutes.post('/', function(req, res) {
@@ -15,23 +15,23 @@ apiRoutes.post('/', function(req, res) {
             res.status(401).send(errors[0]);
             return;
         } else {
-          var data = req.body;
-          var token = jwt.sign({
-              id:data.id,
-              data:data
-          }, SECRET, {
-              expiresIn: 10*60
-          });
-          //send the response to the caller with the access token and data
-          res.send({
-              status: true,
-              description: 'logging in Successfully',
-              token: token
-          });
+            var data = req.body;
+            var token = jwt.sign({
+                id: data.id,
+                data: data
+            }, SECRET, {
+                expiresIn: 10 * 60
+            });
+            //send the response to the caller with the access token and data
+            res.send({
+                status: true,
+                description: 'logging in Successfully',
+                token: token
+            });
         }
 
     } catch (e) {
-      console.log(e);
+        console.log(e);
         res.send({
             status: false,
             description: 'logging failed'

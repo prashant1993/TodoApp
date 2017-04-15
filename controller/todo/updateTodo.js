@@ -5,6 +5,7 @@ var todo = require('../../model/Tododb.js');
 
 /* PUT /todos/:id */
 router.post('/:id', function(req, res) {
+  console.log(req.body);
     todo.findByIdAndUpdate(req.params.id, req.body, function(err, todos) {
         try {
             if (err) throw err;

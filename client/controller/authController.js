@@ -1,28 +1,25 @@
-app.controller('authController' , function($scope,$location,$auth){
-console.log("heeee");
+app.controller('authController' , function($scope,$location,$auth,$state){
 var info = $location.url();
-console.log(info);
-var authData = {};
-// $scope authData = info;
-console.log(authData);
-// $auth.login(authData,{url:"/login",method:"POST"})
-//   .then(function(data) {
-//     console.log(data);
-//     // toastr.success('You have successfully signed in!');
-//     if (data.data.status === true)
-//     $state.go("home");
-//     })
-//   .catch(function(error) {
-//     // toastr.error(error.data.message, error.status);
-//     console.log(error.data.message);
-//     console.log(error.status);
-//   });
+var temp ='{"';
+temp += info.substring(info.indexOf("?")+1);
 
-        // $http.post('/',info.access_token,info.user,info.email)
-        //         .then(function(data) {
-        //
-        //         })
-        //         .catch(function(data) {
-        //                 console.log('Error: ' + data);
-        //         });
+temp =temp.split("=").join('":"');
+temp =temp.split("&").join('","');
+temp+='"}';
+// console.log(info.user);
+var authData =JSON.parse(temp);
+
+$auth.login(authData,{url:"/generateToken",method:"POST"})
+  .then(function(data) {
+
+    if (data.data.status)
+    $state.go("home");
+    else {
+      $state.go("login");
+    }
+    })
+  .catch(function(error) {
+    console.log(error.data);
+    console.log(error.status);
+  });
 });

@@ -4,7 +4,7 @@ var config = require("../config/config");
 var apiRoutes = express.Router();
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var SECRET = new config().secret; // creating object of class config
-var User = require("../model/signUp");
+var User = require("../model/user");
 
 apiRoutes.post('/', function(req, res) {
     try {
@@ -36,7 +36,7 @@ apiRoutes.post('/', function(req, res) {
                         var token = jwt.sign({
                             id: userObj._id
                         }, SECRET, {
-                            expiresIn: 10*60
+                            expiresIn: 100*60
                         });
                         //send the response to the caller with the access token and data
                         res.send({

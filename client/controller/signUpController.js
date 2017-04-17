@@ -1,8 +1,10 @@
 app.controller('signUpController', function($scope, $http, $state, $auth) {
     $scope.signUp = function() {
-        $auth.signup($scope.user)
+        $auth.signup($scope.user, {
+                url: "/signUp",
+                method: "POST"
+            })
             .then(function(data) {
-                //  $auth.setToken(response);
                 //  $location.path('/');
                 console.log(data.data.status);
                 // if(response.data.status === true)
@@ -12,7 +14,6 @@ app.controller('signUpController', function($scope, $http, $state, $auth) {
                 console.log(data);
             })
             .catch(function(data) {
-                //  toastr.error(response.data.message);
                 console.log("fail");
                 console.log(data.data.description);
             });

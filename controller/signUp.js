@@ -44,7 +44,7 @@ apiRoutes.post("/", function(req, res) {
         console.log(e);
         res.send({
             status: false,
-            description: "Please fill the correct information  "
+            description: "Please fill the correct information"
         });
     }
 });

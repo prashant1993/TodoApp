@@ -15,6 +15,7 @@ apiRoutes.post('/', function(req, res) {
             res.status(401).send(errors[0]);
             return;
         } else {
+          // console.log(req.body);
             var data = req.body;
             var token = jwt.sign({
                 id: data.id,
@@ -29,7 +30,6 @@ apiRoutes.post('/', function(req, res) {
                 token: token
             });
         }
-
     } catch (e) {
         console.log(e);
         res.send({

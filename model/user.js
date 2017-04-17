@@ -19,6 +19,10 @@ var userSchema = new Schema({
         mobileNo: {
             type: String,
             required: false
+        },
+        profile: {
+            data: Buffer,
+            contentType: String
         }
     },
     fb: {

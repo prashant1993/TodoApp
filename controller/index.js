@@ -10,11 +10,13 @@ router.use('/signUp', require('./signUp'));
 router.use('/login', require('./login'));
 router.use('/generateToken', require('./generateToken'));
 
-router.use("/authenticate", require('./authenticate'));
+// router.use("/authenticate", require('./authenticate'));
+router.use("/userprofile", require('./authenticate'), require("./userprofile"));
+
 router.use("/todo/readTodo", require('./authenticate'), require("./todo/readTodo"));
 router.use("/todo/createTodo", require('./authenticate'), require("./todo/createTodo"));
 router.use("/todo/deleteTodo", require('./authenticate'), require("./todo/deleteTodo"));
-router.use("/todo", require('./authenticate'), require("./todo/updateTodo"));
+router.use("/todo/updateTodo", require('./authenticate'), require("./todo/updateTodo"));
 
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
@@ -25,7 +27,7 @@ router.use("/todo", require('./authenticate'), require("./todo/updateTodo"));
 
 router.get('/auth/facebook',
     passport.authenticate('facebook', {
-        scope: 'email'
+        scope: ['email','public_profile']
     }));
 
 // Facebook will redirect the user to this URL after approval.  Finish the
@@ -42,12 +44,10 @@ router.get('/auth/facebook',
 //
 
 router.get('/facebook/callback',facebookSignInCallback);
-
-
 function facebookSignInCallback(req, res, next) {
     passport = req._passport.instance;
     passport.authenticate('facebook',function(err, user, info) {
-			console.log("users::",user);
+			// console.log("users::",user);
         if(err) {
             return next(err);
         }
@@ -56,7 +56,7 @@ function facebookSignInCallback(req, res, next) {
         }
         // users.findOne({fb:{email: user._json.email}},function(err,user) {
             res.writeHead(302, {
-                'Location': '/#!/authProvider?token=' + user.fb.access_token + '&id='+user._id+'&user=' + user.fb.id+'&email='+user.fb.email+'&provider='+'fb'
+                'Location': '/#!/authProvider?token=' + user.fb.access_token + '&id='+user._id+ '&fb_id='+user.fb.id+ '&email='+user.fb.email+ '&photo='+user.fb.profile+ '&provider='+'fb'
             });
             res.end();
         // });
@@ -97,7 +97,7 @@ router.get('/auth/google',
             }
             // users.findOne({fb:{email: user._json.email}},function(err,user) {
                 res.writeHead(302, {
-                    'Location': '/#!/authProvider?token=' + user.google.access_token + '&id='+user._id+'&user=' + user.google.id+'&email='+user.google.email+'&provider='+'google'
+                    'Location': '/#!/authProvider?token=' + user.google.access_token + '&id='+user._id+'&google_id='+user.google.id+ '&email='+user.google.email+'&provider='+'google'
                 });
                 res.end();
             // });

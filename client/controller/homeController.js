@@ -1,14 +1,14 @@
 
     app.controller('homeController', function($scope, $http , $auth,$uibModal,$log) {
         $scope.newTodo = {};
-         openNav = function() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-        };
-         closeNav = function() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        };
+        //  openNav = function() {
+        //     document.getElementById("mySidenav").style.width = "250px";
+        //     document.getElementById("main").style.marginLeft = "250px";
+        // };
+        //  closeNav = function() {
+        //     document.getElementById("mySidenav").style.width = "0";
+        //     document.getElementById("main").style.marginLeft = "0";
+        // };
 
         $(document).ready(function() {
             $('#list').click(function(event) {
@@ -21,10 +21,22 @@
                 $('#products .item').addClass('grid-group-item');
             });
         });
-        // $("#menu-toggle").click(function(e) {
-        //         e.preventDefault();
-        //         $("#wrapper").toggleClass("toggled");
-        //     });
+        $("#menu-toggle").click(function(e) {
+          e.preventDefault();
+          $("#wrapper").toggleClass("toggled");
+      });
+
+      $scope.readuser = function() {
+      $http.get('/userprofile', {headers:{"x-access-token":$auth.getToken}})
+              .then(function(data) {
+                console.log(data.data.user.local);
+                      $scope.user = data.data.user.local;
+              })
+              .catch(function(data) {
+                      console.log('Error: ' + data);
+              });
+            };
+
         // when landing on the page, get all todos and show them
         $scope.readTodo = function() {
         $http.get('/todo/readTodo',{headers:{"x-access-token":$auth.getToken}})
@@ -82,29 +94,29 @@
                templateUrl: 'template/popup.html',
                controller: function ($uibModalInstance,$scope) {
                  $scope.todo = data;
-                 this.cancel = function () {
-                console.log('called');
-                  $uibModalInstanceProvider.dismiss('cancel');
-                };
+                //  this.cancel = function () {
+                // console.log('called');
+                //   $uibModalInstanceProvider.dismiss('cancel');
+                // };
               this.ok = function () {
                     $uibModalInstance.close({title:$ctrl.title , description:$ctrl.description});
               };
 
-              // $scope.updateTodo = function(todo) {
-              //   console.log(todo);
-              //         $http.post('/todo/updateTodo/' + todo.t_id, {headers:{"x-access-token":$auth.getToken}})
-              //                 .then(function(data) {
-              //                         $scope.todo = data.data;
-              //                         console.log(data);
-              //                 })
-              //                 .catch(function(data) {
-              //                         console.log('Error: ' + data);
-              //                 });
-              // };
+              $scope.updateTodo = function(todo) {
+                      $http.post('/todo/updateTodo/' + todo.t_id ,$scope.todo, {headers:{"x-access-token":$auth.getToken}})
+                              .then(function(data) {
+                                console.log(data);
+                                      $scope.todo = data.data;
+                                      console.log(data);
+                              })
+                              .catch(function(data) {
+                                      console.log('Error: ' + data);
+                              });
+              };
 
-              this.cancel = function () {
-                    $uibModalInstance.dismiss('cancel');
-            };
+            //   this.cancel = function () {
+            //         $uibModalInstance.dismiss('cancel');
+            // };
                },
                controllerAs: '$ctrl',
           });

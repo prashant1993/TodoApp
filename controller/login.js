@@ -28,10 +28,8 @@ apiRoutes.post('/', function(req, res) {
                             description: 'logging failed'
                         });
                     } else {
-                        // console.log(user);
+                        console.log(user);
                         var userObj = user.toJSON();
-                        // console.log(userObj._id);
-                        // console.log(typeof userObj._id);
                         // generate the token because we have the username and pasword matching
                         var token = jwt.sign({
                             id: userObj._id

@@ -6,7 +6,9 @@ var todo = require('../../model/Tododb.js');
 /* DELETE /todos/:id */
 router.delete('/:id', function(req, res) {
     try {
+console.log(req.decoded);
         var user_id = req.decoded;
+
         todo.find({
             _id: req.params.id,
             user_id: user_id

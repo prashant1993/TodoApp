@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap','xeditable']);
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
     /**
@@ -66,8 +66,5 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
             url: '/authProvider',
             template: 'template/home.html',
             controller: 'authController',
-            // controller: function () {
-            //   console.log();
-            // }
         });
 });

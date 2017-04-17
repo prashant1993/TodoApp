@@ -43,7 +43,7 @@ module.exports = function(passport) {
                     newUser.google.access_token = access_token; // we will save the token that google provides to the user
                     newUser.google.firstName = profile.displayName;
                     newUser.google.email = profile.emails[0].value; // google can return multiple emails so we'll take the first
-                    newUser.google.profile = profile.picture;
+                    newUser.google.profile = profile.image;
                     // save our user to the database
                     newUser.save(function(err) {
                         if (err)

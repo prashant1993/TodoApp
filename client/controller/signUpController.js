@@ -1,5 +1,8 @@
 app.controller('signUpController', function($scope, $http, $state, $auth) {
-    $scope.signUp = function() {
+    $scope.signUp = function(user) {
+      if(!user.name || !user.email || !user.password || !user.mobileNo)
+      throw err;
+      else
         $auth.signup($scope.user, {
                 url: "/signUp",
                 method: "POST"

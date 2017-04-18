@@ -134,6 +134,7 @@
                                     <span class="icon-bar"></span>
                                 </button>
                                 <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+
                             </div>
                             <div id="navbar" class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav navbar-right">
@@ -143,7 +144,7 @@
                                 </ul>
                                 <form class="navbar-form navbar-right" >
                                		<div class="input-group">
-                    					<input type="text" class="form-control" placeholder="Search..."  name="search" ng-model="searchTodos">
+                                         <input type="text" class="form-control" placeholder="Search..."  name="search" ng-model="searchTodos">
                                       	<div class="input-group-btn">
                                         	<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search" ></span></button>
                                       	</div>
@@ -195,16 +196,17 @@
                                         <div class="">
                                           <div class="panel-group" style="margin-right:12%;">
                                               <div class="panel panel-default">
-                                                  <div class="panel-heading">
+                                                  <!-- <div class="panel-heading"> -->
                                                       <h4 class="panel-title">
-                                                 <a data-toggle="collapse"  href="#collapse1"> <input type="text" style="border:none;" ng-model="newTodo.title" placeholder="title" class="form-control"></a>
-                                               </h4>
-                                                  </div>
+                                                        <a data-toggle="collapse"  href="#collapse1"> <input type="text" style="border:none;box-shadow:none;" ng-model="newTodo.title" placeholder="title" class="form-control"></a>
+                                                      </h4>
+                                                  <!-- </div> -->
                                                   <div id="collapse1" class="panel-collapse collapse">
-                                                      <div class="panel-body"><textarea rows="3" multiline="true" style="border:none;" ng-model="newTodo.description" placeholder="description" class="form-control" contenteditable="true"></textarea>
-                                                          <label id="date">Reminder:<input type="date"  style="border:none;" ng-model="newTodo.reminder" ></label>
-                                                          <label id="add" ng-click="createTodo();readTodo()" >Done</label>
-                                                      </div>
+                                                      <!-- <div class="panel-body"> -->
+                                                        <textarea rows="3" multiline="true" style="border:none;box-shadow: none;" ng-model="newTodo.description" placeholder="description" class="form-control" contenteditable="true"></textarea>
+                                                          <label id="date" style="margin-left:10px;">Reminder:<input type="date"  style="border:none;" ng-model="newTodo.reminder" ></label>
+                                                          <label id="add" ng-click="createTodo();readTodo()" style="margin-right:10px;">Done</label>
+                                                      <!-- </div> -->
                                                   </div>
                                               </div>
                                         </div>
@@ -215,14 +217,14 @@
                                               <div class="cardRow " >
                                                   <div class="card" ng-class="{'col-xs-12':!isList, 'col-md-4':!isList, 'col-sm-4':!isList,'col-lg-3':!isList}" ng-repeat="todo in todos | filter: searchTodos">
                                                       <div class="slideDown card-4">
-                                                          <h3 style="overflow: hidden; text-overflow: ellipsis;" ng-click="loadModel(todo)">{{todo.title}}</h3>
-                                                          <div style="overflow: hidden; text-overflow: ellipsis;" ng-click="loadModel(todo)" >{{todo.description}}</div>
+                                                          <h3 style="overflow: hidden;text-overflow:ellipsis;" ng-click="loadModel(todo)">{{todo.title}}</h3>
+                                                          <div style="overflow:hidden; text-overflow:ellipsis;" >{{todo.description}}</div>
                                                           <div style="padding-top: 10px margin-left:10px;" id="row">
                                                               <div class="row">
                                                                   <div class="col-xs-12 col-md-12">
-                                                                      <a><span class="glyphicon glyphicon-trash lead"  id="trash" ng-click="deleteTodo(todo.t_id);readTodo()"></span></a>
-                                                                      <a><span class="glyphicon glyphicon-pencil lead" id="pencil" ng-click="updateTodo(todo.t_id)"></span></a>
-                                                                      <span>Reminder:{{todo.reminder | date}}</span>
+                                                                      <a><span class="glyphicon glyphicon-trash "  id="trash" ng-click="deleteTodo(todo.t_id);readTodo()"></span></a>
+                                                                      <a><span class="glyphicon glyphicon-pencil " id="pencil" ng-click="loadModel(todo)"></span></a>
+                                                                      <span>{{todo.reminder | date}}</span>
                                                                   </div>
                                                               </div>
                                                           </div>
@@ -247,12 +249,13 @@
   <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h4 class="modal-title" id="myModalLabel">user profile</h4>
-    </div>
+    </div> -->
 
     <form>
         <div class="modal-body">
+          <img src="cinqueterre.jpg" class="img-circle" alt="Cinque Terre" width="200" height="200">
             <div class="col-md-12 col-lg-12">
                 <div class="form-group">
                     <label>user name:</label>{{user.name}}

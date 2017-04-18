@@ -1,12 +1,14 @@
 app.controller('loginController' , function($scope,$http,$state,$auth){
-console.log("heeeeee");
-
 $scope.login = function() {
   $auth.login($scope.user,{url:"/login",method:"POST"})
     .then(function(data) {
       console.log(data);
-      // if (data.data.status === true)
-      $state.go("home");
+      if (data.data.status === true)
+      {
+        $state.go("home");
+    } else {
+        alert("login fail,plz fill the correct info ");
+      }
       })
     .catch(function(error) {
       console.log(error.data.message);
@@ -14,9 +16,6 @@ $scope.login = function() {
     });
 };
 
-// $scope.loginProvider = function(provider){
-//   $http({"method":"get","url":"http://localhost:8088/auth/"+provider});
-// };
 });
 
  /*using http service*/

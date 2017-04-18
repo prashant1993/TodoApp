@@ -1,6 +1,5 @@
-var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap','xeditable']);
+var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
-
     /**
      * Helper auth functions
      */
@@ -29,7 +28,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
     }];
 
     // $authProvider.loginUrl = '/login';
-
 
     $urlRouterProvider.otherwise('/login');
     $stateProvider

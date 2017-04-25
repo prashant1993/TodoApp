@@ -6,9 +6,10 @@ app.controller('authController', function($scope, $location, $auth, $state) {
     temp = temp.split("=").join('":"');
     temp = temp.split("&").join('","');
     temp += '"}';
+    // console.log(temp);
     // console.log(info.user);
     var authData = JSON.parse(temp);
-
+    // localStorage.setItem("access_token",temp);
     $auth.login(authData, {
             url: "/generateToken",
             method: "POST"

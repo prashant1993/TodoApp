@@ -21,7 +21,7 @@ apiRoutes.post('/', function(req, res) {
                 id: data.id,
                 data: data
             }, SECRET, {
-                expiresIn: 10 * 60
+                expiresIn: 100 * 60
             });
             //send the response to the caller with the access token and data
             res.send({

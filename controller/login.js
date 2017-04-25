@@ -22,13 +22,14 @@ apiRoutes.post('/', function(req, res) {
             }, function(err, user) {
                 try {
                     if (err) throw err;
+                    console.log("121651456::",user);
                     if (!user) {
                         res.send({
                             status: false,
                             description: 'logging failed'
                         });
                     } else {
-                        console.log(user);
+                        // console.log(user);
                         var userObj = user.toJSON();
                         // generate the token because we have the username and pasword matching
                         var token = jwt.sign({
@@ -45,6 +46,7 @@ apiRoutes.post('/', function(req, res) {
                         });
                     }
                 } catch (e) {
+                  console.log(e);
                     res.send({
                         status: false,
                         description: 'logging failed'

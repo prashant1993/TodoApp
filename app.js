@@ -8,7 +8,7 @@ var validator = require('express-validator');
 // var oauth = require('oauthio');
 
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));

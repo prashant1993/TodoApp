@@ -6,12 +6,15 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var facebook = require('./facebook')(passport); //configure facebook
 var google = require('./google')(passport); //configure facebook
 var users = require("../model/user");
+// var graph = require('fbgraph');
+
 router.use('/signUp', require('./signUp'));
 router.use('/login', require('./login'));
 router.use('/generateToken', require('./generateToken'));
 
 // router.use("/authenticate", require('./authenticate'));
 router.use("/userprofile", require('./authenticate'), require("./userprofile"));
+router.use("/profilePic", require('./authenticate'), require("./profilePic"));
 
 router.use("/todo/readTodo", require('./authenticate'), require("./todo/readTodo"));
 router.use("/todo/createTodo", require('./authenticate'), require("./todo/createTodo"));
@@ -27,7 +30,7 @@ router.use("/todo/updateTodo", require('./authenticate'), require("./todo/update
 
 router.get('/auth/facebook',
     passport.authenticate('facebook', {
-        scope: ['email','public_profile']
+        scope: ['email','public_profile','user_photos','publish_actions','user_status']
     }));
 
 // Facebook will redirect the user to this URL after approval.  Finish the
@@ -43,11 +46,12 @@ router.get('/auth/facebook',
 // );
 //
 
+// router.get('/graph.facebook.com/v2.9/me?fields=name,email,photos,likes,location,cover',facebookSignInCallback);
 router.get('/facebook/callback',facebookSignInCallback);
 function facebookSignInCallback(req, res, next) {
     passport = req._passport.instance;
     passport.authenticate('facebook',function(err, user, info) {
-			// console.log("users::",user);
+			console.log("in indes file :users::",user);
         if(err) {
             return next(err);
         }
@@ -95,9 +99,8 @@ router.get('/auth/google',
             if(!user) {
                 return res.redirect('/#!/login');
             }
-            // users.findOne({fb:{email: user._json.email}},function(err,user) {
                 res.writeHead(302, {
-                    'Location': '/#!/authProvider?token=' + user.google.access_token + '&id='+user._id+'&google_id='+user.google.id+ '&email='+user.google.email+'&provider='+'google'
+                    'Location': '/#!/authProvider?token=' + user.google.access_token + '&id='+user._id+'&google_id='+user.google.id+ '&email='+user.google.email+ '&profile='+user.google.image +'&provider='+'google'
                 });
                 res.end();
             // });

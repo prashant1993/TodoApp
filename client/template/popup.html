@@ -1,10 +1,15 @@
+<form name="popup">
+
 <div class="modal-demo">
     <div class="modal-header">
-        <h3 class="modal-title" id="modal-title"  contenteditable="true"  ng-model="title">{{todo.title}}</h3>
+        <h3 class="modal-title" id="modal-title"  style="outline:none" contenteditable="true" ng-model="title"  ng-bind-html="todo.title"></h3>
     </div>
-    <div class="modal-body" id="modal-body"  contenteditable="true"  ng-model="description">{{todo.description}}</div>
+    <div class="modal-body" id="modal-body" style="outline:none" contenteditable="true"  ng-model="description" style="box-border:none;"  ng-bind-html="todo.description"></div>
+    <!-- <div class="modal-body" id="modal-body"  contenteditable="true"  ng-model="description" style="box-border:none;" required>reminder:{{todo.reminder | date}}</div> -->
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="updateTodo(todo);$ctrl.cancel();">Save changes</button>
-        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok();">Close</button>
+        <label type="submit" ng-disabled="popup.$empty" ng-click="updateTodo(todo);$ctrl.cancel();" required>DONE</label>
+        <!-- <button class="btn btn-primary" type="button" ng-click="$ctrl.ok();">Close</button> -->
     </div>
 </div>
+
+</form>

@@ -20,10 +20,7 @@ var userSchema = new Schema({
             type: String,
             required: false
         },
-        profile: {
-            data: Buffer,
-            contentType: String
-        }
+        profile: String,
     },
     fb: {
         id: String,
@@ -31,10 +28,8 @@ var userSchema = new Schema({
         firstName: String,
         lastName: String,
         email: String,
-        profile: {
-            data: Buffer,
-            contentType: String
-        }
+        gender: String,
+        profile: String
     },
     google: {
         id: String,
@@ -42,10 +37,8 @@ var userSchema = new Schema({
         firstName: String,
         lastName: String,
         email: String,
-        profile: {
-            data: Buffer,
-            contentType: String
-        }
+        gender: String,
+        profile: String
     }
 }, {
     collection: "users"
@@ -55,7 +48,22 @@ userSchema.virtual('u_id').get(function() {
     return this._id.toHexString();
 });
 userSchema.set('toJSON', {
-    virtuals: true
+    virtuals: true,
+    transform: function(doc, ret, options) {
+        ret.u_id = ret._id;
+        // if(ret.fb||ret.google||ret.local)
+        // if (ret.fb.profile) {
+        //     ret.fb.profile = JSON.parse(ret.fb.profile);
+        // }
+        // else if (ret.google.profile) {
+        //     ret.google.profile = JSON.parse(ret.google.profile);
+        // }
+        // else if (ret.local.profile) {
+        //     ret.local.profile = JSON.parse(ret.local.profile);
+        // }
+        delete ret._id;
+        return ret;
+    }
 });
 
 // to create a model using it

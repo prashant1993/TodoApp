@@ -1,5 +1,4 @@
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// var GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
 var User = require('../model/user');
 var googleConfig = require('../config/auth');
 var passport = require('passport');
@@ -27,7 +26,9 @@ module.exports = function(passport) {
             User.findOne({
                 'google.id': profile.id
             }, function(err, user) {
-                console.log("google profile", profile);
+                console.log("google profile:", profile.photos);
+
+                console.log(typeof profile.photos);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)
@@ -43,7 +44,9 @@ module.exports = function(passport) {
                     newUser.google.access_token = access_token; // we will save the token that google provides to the user
                     newUser.google.firstName = profile.displayName;
                     newUser.google.email = profile.emails[0].value; // google can return multiple emails so we'll take the first
-                    newUser.google.profile = profile.image;
+                    newUser.google.profile = JSON.stringify(profile.photos);
+                    newUser.google.gender = profile.gender;
+                    // newUser.google.profile = profile.picture;
                     // save our user to the database
                     newUser.save(function(err) {
                         if (err)

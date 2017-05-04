@@ -1,15 +1,7 @@
 app.controller('authController', function($scope, $location, $auth, $state) {
-    var info = $location.url();
-    var temp = '{"';
-    temp += info.substring(info.indexOf("?") + 1);
-
-    temp = temp.split("=").join('":"');
-    temp = temp.split("&").join('","');
-    temp += '"}';
-    // console.log(temp);
-    // console.log(info.user);
-    var authData = JSON.parse(temp);
-    // localStorage.setItem("access_token",temp);
+//get data from the url
+var authData = $location.search();
+    // console.log(authData);
     $auth.login(authData, {
             url: "/generateToken",
             method: "POST"

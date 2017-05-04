@@ -8,13 +8,14 @@ app.controller('signUpController', function($scope, $http, $state, $auth) {
                 method: "POST"
             })
             .then(function(data) {
-                //  $location.path('/');
-                console.log(data.data.status);
-                // if(response.data.status === true)
-                // alert("user register successfully");
+                if(data.data.status === true)
+                {
+                alert("user register successfully");
                 $state.go("login");
-                //  console.log("suuucess");
-                console.log(data);
+              } else {
+              alert("fill the correct info");
+                // console.log(data);
+              }
             })
             .catch(function(data) {
                 console.log("fail");

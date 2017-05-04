@@ -51,22 +51,24 @@ userSchema.set('toJSON', {
     virtuals: true,
     transform: function(doc, ret, options) {
         ret.u_id = ret._id;
-        // if(ret.fb||ret.google||ret.local)
-        // if (ret.fb.profile) {
-        //     ret.fb.profile = JSON.parse(ret.fb.profile);
-        // }
-        // else if (ret.google.profile) {
-        //     ret.google.profile = JSON.parse(ret.google.profile);
-        // }
-        // else if (ret.local.profile) {
-        //     ret.local.profile = JSON.parse(ret.local.profile);
-        // }
+
+        if(ret.fb||ret.google||ret.local)
+        if (ret.fb && ret.fb.profile) {
+            ret.fb.profile = JSON.parse(ret.fb.profile);
+        }
+        else
+        if (ret.google && ret.google.profile) {
+            ret.google.profile = JSON.parse(ret.google.profile);
+        }
+        else
+        if (ret.local && ret.local.profile) {
+            ret.local.profile = JSON.parse(ret.local.profile);
+        }
         delete ret._id;
         return ret;
     }
 });
 
-// to create a model using it
 var user = mongoose.model('User', userSchema);
 
 // make this available to our users in our Node applications

@@ -2,19 +2,57 @@ var Express = require("express");
 var apiRoutes = Express.Router();
 var User = require("../model/user");
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' });
-
-// var upload = multer().single('profilePic');
-
-apiRoutes.post('/', upload.single('profilePic'),function(req, res) {
-  console.log(req.file);
-  console.log(req.body);
-    // User.findById(req.decoded, function(err, user) {
-    //     console.log(req.decoded);
-    //     if (err) throw err;
-    //     else {
-    //
-    //     }
-    // });
+var upload = multer({
+    dest: 'uploads/'
 });
+
+var path = require('path');
+var storage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, './uploads');
+    },
+    filename: function(req, file, callback) {
+        var filename = path.parse(file.originalname);
+        callback(null, filename.name + '-' + Date.now() + filename.ext);
+    }
+});
+
+var upload = multer({
+    storage: storage
+}).single('profilePic');
+
+apiRoutes.post('/', function(req, res) {
+    upload(req, res, function(err) {
+        if (err) {
+          res.send({
+              status: false,
+              message: "not upload"
+        });
+        }
+        var updateData = {
+            local: {}
+        };
+        console.log("hi",req.file);
+        if (req.file) {
+            updateData.local.profile = JSON.stringify([{
+                value: req.file.path
+            }]);
+        }
+        console.log(req.decoded, updateData);
+        var setValue = {};
+        setValue.$set = updateData;
+        User.findByIdAndUpdate(req.decoded, setValue, function(err, data) {
+            if (err) {
+                console.log("err");
+            }
+            console.log("done");
+            console.log(data);
+        });
+        res.send({
+            sucess: true,
+            message: "image uploaded"
+        });
+    });
+});
+
 module.exports = apiRoutes;

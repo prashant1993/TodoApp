@@ -1,20 +1,24 @@
-app.controller('loginController' , function($scope,$http,$state,$auth){
-$scope.login = function() {
-  $auth.login($scope.user,{url:"/login",method:"POST"})
-    .then(function(data) {
-      console.log(data);
-      if (data.data.status === true)
-      {
-        $state.go("home");
-    } else {
-        alert("login fail,plz fill the correct info ");
-      }
-      })
-    .catch(function(error) {
-      console.log(error.data.message);
-      console.log(error.status);
-    });
-};
+app.controller('loginController', function($scope, $http, $state, $auth) {
+//login function
+    $scope.login = function() {
+        $auth.login($scope.user, {
+                url: "/login",
+                method: "POST"
+            })
+            .then(function(data) {
+                console.log(data);
+                if (data.data.status === true) {
+                    $state.go("home");
+                    alert("login successfull");
+                } else {
+                    alert("login fail,plz fill the correct info ");
+                }
+            })
+            .catch(function(error) {
+                console.log(error.data.message);
+                console.log(error.status);
+            });
+    };
 
 });
 

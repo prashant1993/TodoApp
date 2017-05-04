@@ -12,15 +12,17 @@ apiRoutes.post("/", function(req, res) {
         req.checkBody("mobileNo", "Enter a valid mob").matches(/^([7-9]{1}[0-9]{9})$/);
         var errors = req.validationErrors();
         if (errors) {
-            res.send(errors[0]);
-            return;
+          throw errors;
+            // res.send(errors[0]);
+            // return;
         } else {
             var userData = new User({
                 local: {
                     name: req.body.name,
                     email: req.body.email,
                     password: req.body.password,
-                    mobileNo: req.body.mobileNo
+                    mobileNo: req.body.mobileNo,
+                    // profile:req.body.profilePic
                 }
             });
             // save the created user

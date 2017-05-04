@@ -22,7 +22,7 @@ apiRoutes.post('/', function(req, res) {
             }, function(err, user) {
                 try {
                     if (err) throw err;
-                    console.log("121651456::",user);
+                    console.log("user::",user);
                     if (!user) {
                         res.send({
                             status: false,
@@ -32,14 +32,15 @@ apiRoutes.post('/', function(req, res) {
                         // console.log(user);
                         var userObj = user.toJSON();
                         // generate the token because we have the username and pasword matching
+                        console.log(userObj.id);
                         var token = jwt.sign({
-                            id: userObj._id
+                            id: userObj.id
                         }, SECRET, {
                             expiresIn: 100*60
                         });
                         //send the response to the caller with the access token and data
                         res.send({
-                            ObjectId: userObj._id,
+                            ObjectId: userObj.id,
                             status: true,
                             description: 'logging in Successfully',
                             token: token

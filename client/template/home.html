@@ -7,16 +7,15 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-            <a class="navbar-brand" href="#menu-toggle" id="menu-toggle"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
+            <a class="navbar-brand" href="#menu-toggle" id="menu-toggle" data-toggle="tooltip" data-placement="bottom" title="main menu"><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="list"><span class="glyphicon glyphicon-refresh" ng-click="readTodo();grid()"></span></a></li>
-                <li><button id="list" type="button" class="btn btn-dafault glyphicon" ng-click="isList = !isList" ng-class="{'glyphicon-list': !isList, 'glyphicon-th-large': isList}" style="margin-top: 5px"></button></li>
-
+                <li><a href="#" id="list" data-toggle="tooltip" data-placement="bottom" title="refresh"><span  class="glyphicon glyphicon-refresh" ng-click="readTodo()"></span></a></li>
+                <li><button id="list" type="button" data-toggle="tooltip" data-placement="bottom" title="view" class="btn btn-dafault glyphicon" ng-click="isList = !isList" ng-class="{'glyphicon-list': !isList, 'glyphicon-th-large': isList}" style="margin-top: 10px"></button></li>
                 <li class="dropdown" ng-init="readuser()">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background-color:#fb0">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" title="{{user.firstName}} {{user.lastName}} &#10;{{user.email}}" style="background-color:#fb0">
                         <img ng-src="{{user.profile[0].value}}" class="img-circle" alt="profile picture" width="32" height="32">
                     </a>
                     <ul class="dropdown-menu">
@@ -38,23 +37,22 @@
                                 </div>
                             </div>
                         </li>
-                        <li class="divider navbar-login-session-bg" ></li>
-                                      <p>
-                                            <a ui-sref="logout" class="btn btn-default " style="float:right">Logout</a>
-                                        </p>
+                        <li class="divider navbar-login-session-bg"></li>
+                        <p>
+                            <a ui-sref="logout" id="logout" class="btn btn-default ">Logout</a>
+                        </p>
                     </ul>
                 </li>
-
             </ul>
             <form class="navbar-form navbar-right">
+                <span class="heading">BridgeLabz ToDo</span>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search..." id="search" ng-model="searchTodos">
+                    <input type="text" class="form-control" placeholder="Search..." id="search" ng-model="searchTodos.title" ng-model="searchTodos.description">
                 </div>
             </form>
         </div>
     </div>
 </nav>
-
 <div id="wrapper" class="toggled ">
     <div class="container-fluid ">
         <!-- Sidebar -->
@@ -63,25 +61,15 @@
                 <li class="sidebar-brand">
                     <br>
                 </li>
-                <!-- <li class="sidebar-brand" ng-click="readuser()">
-                                        <a href="#" class="navbar-brand" >
-                                            <span class="glyphicon glyphicon-user" data-toggle="modal" data-target="#basicModal" aria-hidden="true"></span> Profile
-                                        </a>
-                                    </li> -->
                 <li>
                     <a href=""><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home</a>
                 </li>
-                <li>
+                <li ng-click="readTodo()">
                     <a href="">
                         <div class="glyphicon glyphicon-leaf" id="notes"> notes</div>
                     </a>
                 </li>
-                <li>
-                    <a href="">
-                        <div class="glyphicon glyphicon-trash" id="trash1"> trash</div>
-                    </a>
-                </li>
-                <li>
+                <li ng-click="customFilter();">
                     <a href="">
                         <div class="glyphicon glyphicon-hand-up" id="reminder"> reminder</div>
                     </a>
@@ -104,38 +92,54 @@
         <div id="page-content-wrapper">
             <div class="container-fluid ">
                 <div class="row">
-                    <div class="">
-                        <div class="panel-group" style="margin-right:12%;">
-                            <div class="panel panel-default">
-                                <!-- <div class="panel-heading"> -->
-                                <p class="panel-title" >
-                                    <a data-toggle="collapse" href="#collapse1"> <input type="text" style="border:none;box-shadow:none;font-size:20px;font-weight:bold;font-family:Times New Roman;" ng-model="newTodo.title" placeholder="Title" class="form-control"></a>
-                                </p>
-                                <!-- </div> -->
-                                <div id="collapse1" class="panel-collapse collapse">
-                                    <!-- <div class="panel-body"> -->
-                                    <textarea rows="3" multiline="true" style="border:none;box-shadow: none;font-size:17px;font-family:'Roboto Slab','Times New Roman',serif;" ng-model="newTodo.description" placeholder="description" class="form-control" contenteditable="true"></textarea>  <!--onkeyup="textAreaAdjust(this)"-->
-                                    <label id="date" style="margin-left:10px;">Reminder:<input type="date"  style="border:none;" ng-model="newTodo.reminder" ></label>
-                                    <label id="add" ng-click="createTodo();readTodo()" style="margin-right:10px;">Done</label>
-                                    <!-- </div> -->
-                                </div>
+                    <!-- <div class=""> -->
+                    <div class="panel-group" style="margin-right:12%;">
+                        <div class="panel panel-default">
+                            <p class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1"> <input type="text" id="text2" ng-model="newTodo.title" placeholder="Title" class="form-control"></a>
+                            </p>
+                            <div id="collapse1" class="panel-collapse collapse">
+                                <textarea rows="3" multiline="true" id="textarea" ng-model="newTodo.description" placeholder="description" class="form-control" contenteditable="true"></textarea>
+                                <label id="date" style="margin-left:10px;">Reminder:<input type="date"  style="border:none;" ng-model="newTodo.reminder" ></label>
+                                <label id="add" ng-click="createTodo();" style="margin-right:10px;">Done</label>
                             </div>
                         </div>
                     </div>
-                    <div class="row " style="margin-left:10%; ">
-                        <!-- <div class="container-fluid"> -->
+                    <!-- </div> -->
+
+                    <div class="row" id="row1">
+                        <!-- <div class="container-fluid" style="margin-left:10%;"> -->
                         <div class="cont " ng-init="readTodo()" ng-class="{list: isList, grid: !isList}">
                             <div class="cardRow slides">
-                                <div class="card" ng-class="{'col-xs-12':!isList, 'col-md-4':!isList, 'col-sm-4':!isList,'col-lg-3':!isList}" ng-repeat="todo in todos |orderBy:'-'| filter: searchTodos">
-                                    <div class="slideDown card-4">
-                                        <p id="title" style=" word-break:break-word;margin-top:10px;font-size:20px;font-weight:bold;font-family:Times New Roman;" ng-bind-html="todo.title | nl2br" ng-click="loadModel(todo)"></p>
-                                        <p id="description" style="word-break:break-word;font-size:17px;font-family:'Roboto Slab','Times New Roman',serif;" ng-bind-html="todo.description | nl2br" ng-click="loadModel(todo)"></p>
-                                        <div style="padding-top:10px margin-left:10px;" id="row">
-                                            <div class="row" style="margin-bottom: 10px;">
-                                                <div class="col-xs-12 col-md-12">
-                                                    <a><span class="glyphicon glyphicon-trash "  id="trash" ng-click="deleteTodo(todo.t_id);readTodo()"></span></a>
-                                                    <span>{{todo.reminder | date}}</span>
+                                <div class="card" ng-class="{'col-xs-12':!isList, 'col-md-4':!isList, 'col-sm-4':!isList,'col-lg-3':!isList}" ng-repeat="todo in todos | orderBy:'-'| filter: searchTodos" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+                                    <div class="slideDown">
+                                        <p id="title" ng-bind-html="todo.title | nl2br" ng-click="loadModel(todo)"></p>
+                                        <p id="description" ng-bind-html="todo.description | nl2br" ng-click="loadModel(todo)"></p>
+                                        <div id="row">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-12" id="row2">
+                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="delete"><span class="glyphicon glyphicon-trash "  id="trash" ng-click="deleteTodo(todo.t_id);" ng-show="hoverEdit"></span></a>
+                                                    <span class="dropdown" id="dropdown2" ng-show="hoverEdit">
+                                                        <i class="glyphicon glyphicon-hand-up dropdown-toggle"  type="button" data-toggle="dropdown" ></i>
+                                                        <ul class="dropdown-menu">
+                                                          <li style="padding-left:20px;">Reminder</li>
+                                                          <li ng-click="createreminder('today',todo.t_id);readTodo()"><a href="#" value="today">Today <span style="float:right">8:00PM</span></a></li>
+                                                          <li ng-click="createreminder('tomorrow',todo.t_id);readTodo()"><a href="#" value="tomorrow">Tomorrow <span style="float:right">8:00AM</span></a></li>
+                                                          <li ng-click="createreminder('nextweek',todo.t_id);readTodo()"><a href="#" value="next Week ">next Week <span style="float:right">8:00AM</span></a></li>
+                                                          <li class="divider"></li>
+                                                          <li><a href="#" ng-click="$event.stopPropagation()">Pick date</a>
+                                                            <datepicker date-format="yyyy-MM-dd" ng-click="$event.stopPropagation()">
+                                                              <input ng-model="date" type="text" placeholder="click to pick date" style="border:none;margin-left:10px;"><i class="glyphicon glyphicon-calendar" ng-click="createreminder(date,todo.t_id);readTodo()"></i>
+                                                            </datepicker>
+                                                          </li>
+                                                    </ul>
+                                                    </span>
+                                                    <span id="created">created:{{todo.updated_at|date:'EEE MMM, dd hh:mm:ss a'}}</span>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div id="reminder1" ng-if="todo.reminder" style="border-top:1px dotted;" ng-mouseenter="options=true" ng-mouseleave="options=false">
+                                            <div style="padding-top:3px;"><i class="glyphicon glyphicon-time"></i>{{todo.reminder | date:'EEE MMM, dd hh:mm:ss a'}}<i class="glyphicon glyphicon-remove-sign" style="float:right;margin-left:10px;" ng-click="deletereminder(todo.t_id);readTodo()"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -146,24 +150,17 @@
                     </div>
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
         </div>
+        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
 </div>
-<div class="notes"></div>
-
-
-
+<!-- /#wrapper -->
+</div>
 
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">user profile</h4>
-    </div> -->
-
                 <form>
                     <div class="modal-body">
                         <div class="col-md-12 col-lg-12">

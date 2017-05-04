@@ -24,7 +24,7 @@ var TodoSchema = new Schema({
     }
 });
 TodoSchema.set('toJSON', {
-    transform: function(doc, ret, options) {
+    transform: function(doc, ret) {
         ret.t_id = ret._id;
         delete ret._id;
         return ret;

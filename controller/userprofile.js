@@ -15,7 +15,7 @@ apiRoutes.get("/", function(req, res) {
             });
             }
             else {
-              console.log(user);
+              console.log("profile in ",user);
               // var userObj = user.toJSON();
               res.send({
                 user:user,

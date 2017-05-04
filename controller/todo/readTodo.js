@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var todo = require('../../model/Tododb.js');
-/* GET /todos listing. */
+/* GET  list of todos. */
 router.get('/', function(req, res) {
     todo.find({
         "user_id": req.decoded
-    }, "title description reminder", function(err, todos) {
+    }, "title description reminder updated_at", function(err, todos) {
         if (err) return next(err);
         res.send(todos);
 

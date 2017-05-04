@@ -2,7 +2,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../model/user');
 var fbConfig = require('../config/auth');
 var passport = require('passport');
-// var oauth = require('oauthio');
 module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
@@ -21,12 +20,12 @@ module.exports = function(passport) {
     passport.use('facebook', new FacebookStrategy(fbConfig.facebookAuth, function(access_token, refresh_token, profile, done) {
         // asynchronous
         process.nextTick(function() {
-          console.log("profile in fb",profile);
+            console.log("profile in fb", profile);
             // find the user in the database based on their facebook id
             User.findOne({
                 'fb.id': profile.id
             }, function(err, user) {
-                console.log("user in fb",user);
+                console.log("user in fb", user);
                 // if there is an error, stop everything and return that
                 // ie an error connecting to the database
                 if (err)

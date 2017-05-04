@@ -22,6 +22,7 @@ module.exports = function(passport) {
     passport.use(new GoogleStrategy(googleConfig.googleAuth, function(access_token, tokenSecret, profile, done) {
         // asynchronous
         process.nextTick(function() {
+            console.log(profile);
             // find the user in the database based on their google id
             User.findOne({
                 'google.id': profile.id

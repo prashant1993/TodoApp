@@ -1,5 +1,6 @@
-var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngImgCrop', '720kb.datepicker']);
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
+
     /**
      * Helper auth functions
      */
@@ -27,7 +28,6 @@ app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
         return deferred.promise;
     }];
 
-    // $authProvider.loginUrl = '/login';
 
     $urlRouterProvider.otherwise('/login');
     $stateProvider

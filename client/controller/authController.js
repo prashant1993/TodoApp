@@ -1,3 +1,7 @@
+/**
+ * auth controller
+ */
+ 
 app.controller('authController', function($scope, $location, $auth, $state) {
 //get data from the url
 var authData = $location.search();

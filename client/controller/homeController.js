@@ -1,22 +1,21 @@
-app.controller('homeController', function($scope, $http, $auth, $uibModal, $timeout, $log, $filter,$state) {
+/**
+ * home controller
+ */
+app.controller('homeController', function($scope, $http, $auth, $uibModal, $timeout, $log, $filter, $state,toastr) {
     $scope.newTodo = {};
     $scope.customFilter = function() {
         $scope.todos = $filter("currentDates")($scope.todos);
     };
 
-    //to dispay tooltip
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
 
-    //drag and drop the divs
+    //drag and drop the cards
     $(".slides").sortable({
         placeholder: 'slide-placeholder',
         axis: "z",
         revert: 150,
         start: function(e, ui) {
             placeholderHeight = ui.item.outerHeight();
-            console.log(placeholderHeight);
+            //console.log(placeholderHeight);
             ui.placeholder.height(placeholderHeight + 15);
             $('<div class="slide-placeholder-animator" data-height="' + placeholderHeight + '"></div>').insertAfter(ui.placeholder);
         },
@@ -44,15 +43,24 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
         $("#wrapper").toggleClass("toggled");
     });
 
-    //hover in hover out
-        $scope.hoverIn = function() {
-            this.hoverEdit = true;
-        };
-        $scope.hoverOut = function() {
-            this.hoverEdit = false;
-        };
+    //hover in hover out the content
+    $scope.hoverIn = function() {
+        this.hoverEdit = true;
+    };
+    $scope.hoverOut = function() {
+        this.hoverEdit = false;
+    };
 
-    //to read the user
+    $scope.refresh = function() {
+        $state.reload();
+    };
+    /**
+     * @function readuser - get the user info
+     * @param {String} user - contain user info
+     * @return - success return the user profile else error message
+     */
+
+    //To read the user
     $scope.readuser = function() {
         $http.get('/userprofile', {
                 headers: {
@@ -74,6 +82,12 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             });
     };
 
+    /**
+     * @function readTodo - get all todos
+     * @param {String} todos - contain todos
+     * @return - success status return the todos else error message
+     */
+
     // when landing on the page, get all todos and show them
     $scope.readTodo = function() {
         $http.get('/todo/readTodo', {
@@ -92,8 +106,14 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
     };
 
 
+    /**
+     * @function createTodo - create todo
+     * @param {String} todos - contain todos
+     * @return - success status return the todos else error message
+     */
+
     // when submitting the add form, send the text to the node API
-    $scope.createTodo = function() {
+    $scope.createTodo = function(todo) {
         console.log($scope.newTodo);
         $http.post('/todo/createTodo', $scope.newTodo, {
                 headers: {
@@ -111,9 +131,15 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             });
     };
 
+    /**
+     * @function deleteTodo - delete todo
+     * @param {String} todos - contain todos
+     * @return - success status return  else error message
+     */
 
     // delete a todo after checking it
     $scope.deleteTodo = function(t_id) {
+        //delete call for delete todo
         $http.delete('/todo/deleteTodo/' + t_id, {
                 headers: {
                     "x-access-token": $auth.getToken
@@ -129,39 +155,50 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             });
     };
 
+    /**
+     * @function createreminder - create reminder
+     * @param {String} remDate - contain reminder date
+     */
 
     // create reminder
-    $scope.createreminder = function(day, t_id) {
+    $scope.createReminder = function(day, t_id) {
         console.log(day);
         console.log(t_id);
         var remDate = new Date();
         if (day == "today") {
             remDate.setHours(20, 0, 0);
             // console.log(remDate);
-            this.updatereminder(remDate, t_id);
+            this.updateReminder(remDate, t_id);
         } else if (day == "tomorrow") {
             remDate.setDate(remDate.getDate() + 1);
             remDate.setHours(8, 0, 0);
             // console.log(remDate);
-            this.updatereminder(remDate, t_id);
+            this.updateReminder(remDate, t_id);
         } else if (day == "nextweek") {
             remDate.setDate(remDate.getDate() + 7);
             // console.log(remDate);
-            this.updatereminder(remDate, t_id);
+            this.updateReminder(remDate, t_id);
         } else {
             // console.log(remDate);
             // console.log(day);
-            this.updatereminder(day, t_id);
+            this.updateReminder(day, t_id);
         }
     };
 
+    /**
+     * @function updateReminder - update reminder
+     * @param {String} reminder - contain reminder date
+     *@return success return updated reminder else error
+     */
+
     // update reminder
-    $scope.updatereminder = function(remDate, t_id) {
+    $scope.updateReminder = function(remDate, t_id) {
         console.log(t_id);
         console.log(remDate);
         $scope.reminder = {
             reminder: remDate
         };
+        //post call for update reminder
         $http.post('/todo/updateTodo/' + t_id, $scope.reminder, {
                 headers: {
                     "x-access-token": $auth.getToken
@@ -177,11 +214,12 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
     };
 
     //  delete reminder
-    $scope.deletereminder = function(t_id) {
+    $scope.deleteReminder = function(t_id) {
         console.log(t_id);
         $scope.reminder = {
             reminder: ""
         };
+        //post call for delete reminder
         $http.post('/todo/updateTodo/' + t_id, $scope.reminder, {
                 headers: {
                     "x-access-token": $auth.getToken
@@ -196,14 +234,14 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             });
     };
 
-//popup model to update data
+    //popup model to update data
     var $ctrl = this;
     $scope.loadModel = function(data) {
         console.log(data);
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             templateUrl: 'template/popup.html',
-            controller: function($uibModalInstance, $scope, $state) {
+            controller: function($uibModalInstance, $scope, $state,toastr) {
                 $scope.todo = data;
                 this.cancel = function() {
                     $uibModalInstance.dismiss();
@@ -240,7 +278,8 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
                             .then(function(data) {
                                 $state.reload();
                                 $scope.todo = data.data;
-                                alert("successfully updated");
+                                toastr.success('Hello world!', 'Toastr fun!');
+                                // alert("successfully updated");
                                 console.log(data);
                             })
                             .catch(function(data) {
@@ -258,7 +297,7 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
     };
 });
 
-//filter to remove the html tags
+//filter for remove the html tags
 app.filter("nl2br", function($filter) {
     return function(data) {
         if (!data) return data;
@@ -266,7 +305,7 @@ app.filter("nl2br", function($filter) {
     };
 });
 
-//filter to display the cuurent todos
+//filter for display the todays todos
 app.filter('currentDates', function() {
     return function(todos) {
         var data_date, filtered_list, i, today;

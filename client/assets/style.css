@@ -194,6 +194,7 @@ height:1000px;;
 #date {
     color: black;
     margin-top: 5px;
+    font-style: normal;
 }
 
 #row >div:hover {
@@ -270,7 +271,7 @@ height:1000px;;
 .cont.list .card>div {
     /*display: table-cell;*/
     vertical-align: middle;
-    padding: 20px;
+    padding: 15px;
     /*margin-bottom: 10%;*/
     /*margin-bottom: 10%;*/
 }

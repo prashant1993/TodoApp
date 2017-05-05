@@ -12,10 +12,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="list" data-toggle="tooltip" data-placement="bottom" title="refresh"><span  class="glyphicon glyphicon-refresh" ng-click="readTodo()"></span></a></li>
+                <li><a href="#" id="list" data-toggle="tooltip" data-placement="bottom" title="refresh"><span  class="glyphicon glyphicon-refresh" ng-click="refresh()"></span></a></li>
                 <li><button id="list" type="button" data-toggle="tooltip" data-placement="bottom" title="view" class="btn btn-dafault glyphicon" ng-click="isList = !isList" ng-class="{'glyphicon-list': !isList, 'glyphicon-th-large': isList}" style="margin-top: 10px"></button></li>
                 <li class="dropdown" ng-init="readuser()">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" title="{{user.firstName}} {{user.lastName}} &#10;{{user.email}}" style="background-color:#fb0">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="{{user.firstName}} {{user.lastName}} &#10;{{user.email}}" style="background-color:#fb0">
                         <img ng-src="{{user.profile[0].value}}" class="img-circle" alt="profile picture" width="32" height="32">
                     </a>
                     <ul class="dropdown-menu">
@@ -93,15 +93,25 @@
             <div class="container-fluid ">
                 <div class="row">
                     <!-- <div class=""> -->
-                    <div class="panel-group" style="margin-right:12%;">
+                    <div class="panel-group" style="margin-right:5%;margin-left:5%">
                         <div class="panel panel-default">
                             <p class="panel-title">
                                 <a data-toggle="collapse" href="#collapse1"> <input type="text" id="text2" ng-model="newTodo.title" placeholder="Title" class="form-control"></a>
                             </p>
                             <div id="collapse1" class="panel-collapse collapse">
                                 <textarea rows="3" multiline="true" id="textarea" ng-model="newTodo.description" placeholder="description" class="form-control" contenteditable="true"></textarea>
-                                <label id="date" style="margin-left:10px;">Reminder:<input type="date"  style="border:none;" ng-model="newTodo.reminder" ></label>
-                                <label id="add" ng-click="createTodo();" style="margin-right:10px;">Done</label>
+                                <label id="date" style="margin-left:10px;">Reminder:{{newTodo.reminder|date:'EEE MMM, dd hh:mm:ss a'}}
+                                  <span class="dropdown">
+                                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#p" href="#p">
+                                      <div class="input-group"><i class="glyphicon glyphicon-hand-up" data-ng-model="newTodo.reminder"></i>
+                                      </div>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                      <datetimepicker data-ng-model="newTodo.reminder" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                                    </ul>
+                                  </span>
+                                </label>
+                                <label id="add" ng-click="createTodo(newTodo);readTodo()" style="margin-right:10px;">Done</label>
                             </div>
                         </div>
                     </div>
@@ -118,20 +128,33 @@
                                         <div id="row">
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-12" id="row2">
-                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="delete"><span class="glyphicon glyphicon-trash "  id="trash" ng-click="deleteTodo(todo.t_id);" ng-show="hoverEdit"></span></a>
-                                                    <span class="dropdown" id="dropdown2" ng-show="hoverEdit">
+                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="delete"><span class="glyphicon glyphicon-trash "  id="trash" ng-click="deleteTodo(todo.t_id);" ></span></a>
+                                                    <span class="dropdown" id="dropdown2" >
                                                         <i class="glyphicon glyphicon-hand-up dropdown-toggle"  type="button" data-toggle="dropdown" ></i>
                                                         <ul class="dropdown-menu">
                                                           <li style="padding-left:20px;">Reminder</li>
-                                                          <li ng-click="createreminder('today',todo.t_id);readTodo()"><a href="#" value="today">Today <span style="float:right">8:00PM</span></a></li>
-                                                          <li ng-click="createreminder('tomorrow',todo.t_id);readTodo()"><a href="#" value="tomorrow">Tomorrow <span style="float:right">8:00AM</span></a></li>
-                                                          <li ng-click="createreminder('nextweek',todo.t_id);readTodo()"><a href="#" value="next Week ">next Week <span style="float:right">8:00AM</span></a></li>
+                                                          <li ng-click="createReminder('today',todo.t_id);readTodo()"><a href="#" value="today">Today <span style="float:right">8:00PM</span></a></li>
+                                                          <li ng-click="createReminder('tomorrow',todo.t_id);readTodo()"><a href="#" value="tomorrow">Tomorrow <span style="float:right">8:00AM</span></a></li>
+                                                          <li ng-click="createReminder('nextweek',todo.t_id);readTodo()"><a href="#" value="next Week">next Week <span style="float:right">8:00AM</span></a></li>
                                                           <li class="divider"></li>
-                                                          <li><a href="#" ng-click="$event.stopPropagation()">Pick date</a>
-                                                            <datepicker date-format="yyyy-MM-dd" ng-click="$event.stopPropagation()">
-                                                              <input ng-model="date" type="text" placeholder="click to pick date" style="border:none;margin-left:10px;"><i class="glyphicon glyphicon-calendar" ng-click="createreminder(date,todo.t_id);readTodo()"></i>
-                                                            </datepicker>
-                                                          </li>
+                                                    <li>
+                                                      <a href="#" ng-click="$event.stopPropagation()">Pick date</a>
+                                                      <label id="date" style="margin-left:10px;">Reminder:{{newTodo.reminder|date:'EEE MMM, dd hh:mm:ss a'}}
+                                                        <div class="dropdown">
+                                                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#a" href="#a">
+                                                            <div class="input-group"><i class="glyphicon glyphicon-hand-up"  data-ng-model="newTodo.reminder"></i>
+                                                            </div>
+                                                          </a>
+                                                          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                            <datetimepicker data-ng-model="newTodo.reminder" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                                                          </ul>
+                                                        </div>
+                                                      </label>
+
+                                                      <!-- <datetimepicker data-ng-model="newTodo.reminder" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/> -->
+
+
+                                                    </li>
                                                     </ul>
                                                     </span>
                                                     <span id="created">created:{{todo.updated_at|date:'EEE MMM, dd hh:mm:ss a'}}</span>
@@ -139,7 +162,7 @@
                                             </div>
                                         </div>
                                         <div id="reminder1" ng-if="todo.reminder" style="border-top:1px dotted;" ng-mouseenter="options=true" ng-mouseleave="options=false">
-                                            <div style="padding-top:3px;"><i class="glyphicon glyphicon-time"></i>{{todo.reminder | date:'EEE MMM, dd hh:mm:ss a'}}<i class="glyphicon glyphicon-remove-sign" style="float:right;margin-left:10px;" ng-click="deletereminder(todo.t_id);readTodo()"></i>
+                                            <div style="padding-top:3px;"><i class="glyphicon glyphicon-time"></i>{{todo.reminder | date:'EEE MMM, dd hh:mm:ss a'}}<i class="glyphicon glyphicon-remove-sign" style="float:right;margin-left:10px;" ng-click="deleteReminder(todo.t_id);readTodo()"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -155,45 +178,45 @@
     </div>
 </div>
 <!-- /#wrapper -->
-</div>
 
 <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <form>
-                    <div class="modal-body">
-                        <div class="col-md-12 col-lg-12">
+                    <div class="modal-body" style="margin-left:120px;">
+                        <div class="col-md-12 col-lg-12" style="margin-left:20%">
                             <div class="form-group">
                                 <img ng-src="{{user.profile[0].value}}" class="img-circle" alt="profile picture" width="70" height="70">
                             </div>
                         </div>
-                        <div class="col-md-12 col-lg-12">
+                        <div class="col-md-12 col-lg-12" >
                             <div class="form-group">
-                                <label>User Name:</label>{{user.name || user.firstName}} {{user.lastName}}
+                                <label>User Name:</label> {{user.name || user.firstName}} {{user.lastName}}
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label>Email:</label>{{user.email}}
+                                <label>Email:</label> {{user.email}}
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label>Gender:</label>{{user.gender}}
+                                <label>Gender:</label> {{user.gender}}
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-12">
                             <div class="form-group">
-                                <label>Mobile Number:</label>{{user.mobileNo}}
+                                <label>Mobile Number:</label> {{user.mobileNo}}
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div style="float:right;margin-right:10%;">
                         <button type="reset" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
                     </div>
                 </form>
             </div>
         </div>
     </div>
+</div>

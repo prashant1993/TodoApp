@@ -1,3 +1,6 @@
+/**
+ * login controller
+ */
 var express = require("express");
 var app = express();
 var config = require("../config/config");
@@ -8,6 +11,7 @@ var User = require("../model/user");
 
 apiRoutes.post('/', function(req, res) {
     try {
+      //email and password validation 
         req.checkBody("email", "Enter a valid email address.").isEmail();
         req.checkBody("password", "Enter a valid password").matches(/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/);
 

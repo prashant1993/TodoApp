@@ -1,3 +1,7 @@
+/**
+ * facebook login controller
+ */
+
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../model/user');
 var fbConfig = require('../config/auth');
@@ -47,7 +51,7 @@ module.exports = function(passport) {
                     newUser.fb.email = profile.emails[0].value; // facebook can return multiple emails so we'll take the first
                     newUser.fb.gender = profile.gender;
                     newUser.fb.profile = JSON.stringify(profile.photos);
-                    // save our user to the databasenewUser.fb.profile = profile.photos;
+                    // save our user to the database
                     newUser.save(function(err) {
                         if (err)
                             throw err;

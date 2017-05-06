@@ -2,6 +2,7 @@ var mongoose = require("mongoose");
 //set variable reffernce to mongoose schema
 var Schema = mongoose.Schema;
 //create the schema
+//user schema for local ,facebook and google user
 var userSchema = new Schema({
     local: {
         name: {
@@ -44,6 +45,7 @@ var userSchema = new Schema({
     collection: "users"
 });
 
+//create virtual id
 userSchema.virtual('u_id').get(function() {
     return this._id.toHexString();
 });

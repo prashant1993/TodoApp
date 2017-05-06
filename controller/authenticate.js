@@ -1,3 +1,6 @@
+/**
+ * authenticate controller
+ */
 var express = require('express'),
     router = express.Router(),
     jwt = require("jsonwebtoken"),

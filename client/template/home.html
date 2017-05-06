@@ -45,7 +45,7 @@
                 </li>
             </ul>
             <form class="navbar-form navbar-right">
-                <span class="heading">BridgeLabz ToDo</span>
+
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search..." id="search" ng-model="searchTodos.title" ng-model="searchTodos.description">
                 </div>
@@ -103,7 +103,7 @@
                                 <label id="date" style="margin-left:10px;">Reminder:{{newTodo.reminder|date:'EEE MMM, dd hh:mm:ss a'}}
                                   <span class="dropdown">
                                     <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#p" href="#p">
-                                      <div class="input-group"><i class="glyphicon glyphicon-hand-up" data-ng-model="newTodo.reminder"></i>
+                                      <div class="input-group"><i  id="date" class="glyphicon glyphicon-hand-up" data-ng-model="newTodo.reminder"></i>
                                       </div>
                                     </a>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -111,7 +111,7 @@
                                     </ul>
                                   </span>
                                 </label>
-                                <label id="add" ng-click="createTodo(newTodo);readTodo()" style="margin-right:10px;">Done</label>
+                                <label id="add" ng-click="createTodo(newTodo);readTodo();" style="margin-right:10px;">Done</label>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                                 <div class="col-xs-12 col-md-12" id="row2">
                                                     <a href="#" data-toggle="tooltip" data-placement="bottom" title="delete"><span class="glyphicon glyphicon-trash "  id="trash" ng-click="deleteTodo(todo.t_id);" ></span></a>
                                                     <span class="dropdown" id="dropdown2" >
-                                                        <i class="glyphicon glyphicon-hand-up dropdown-toggle"  type="button" data-toggle="dropdown" ></i>
+                                                        <i class="glyphicon glyphicon-hand-up dropdown-toggle"  type="button" data-toggle="dropdown" data-toggle="tooltip" data-placement="bottom" title="reminder" ></i>
                                                         <ul class="dropdown-menu">
                                                           <li style="padding-left:20px;">Reminder</li>
                                                           <li ng-click="createReminder('today',todo.t_id);readTodo()"><a href="#" value="today">Today <span style="float:right">8:00PM</span></a></li>
@@ -139,21 +139,21 @@
                                                           <li class="divider"></li>
                                                     <li>
                                                       <a href="#" ng-click="$event.stopPropagation()">Pick date</a>
-                                                      <label id="date" style="margin-left:10px;">Reminder:{{newTodo.reminder|date:'EEE MMM, dd hh:mm:ss a'}}
+                                                      <!-- <label id="date" style="margin-left:10px;">Reminder:{{date | date:'EEE MMM, dd hh:mm:ss a'}}
                                                         <div class="dropdown">
-                                                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#a" href="#a">
-                                                            <div class="input-group"><i class="glyphicon glyphicon-hand-up"  data-ng-model="newTodo.reminder"></i>
+                                                          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#a" href="#a" >
+                                                            <div class="input-group"><i class="glyphicon glyphicon-hand-up dropdown-toggle"  data-ng-model="date" ng-click="$event.stopPropagation()" style="display: inline-block !important;"></i>
                                                             </div>
                                                           </a>
                                                           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                            <datetimepicker data-ng-model="newTodo.reminder" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+                                                            <datetimepicker data-ng-model="date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
                                                           </ul>
                                                         </div>
+                                                      </label> -->
+
+                                                      <label id="date" style="margin-left:10px;" >Reminder:{{date | date:'EEE MMM, dd hh:mm:ss a'}}</label><label ng-click="createReminder(date,todo.t_id);readTodo()">done
+                                                         <datetimepicker ng-click="$event.stopPropagation()" data-ng-model="date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" ></datetimepicker>
                                                       </label>
-
-                                                      <!-- <datetimepicker data-ng-model="newTodo.reminder" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/> -->
-
-
                                                     </li>
                                                     </ul>
                                                     </span>
@@ -162,7 +162,7 @@
                                             </div>
                                         </div>
                                         <div id="reminder1" ng-if="todo.reminder" style="border-top:1px dotted;" ng-mouseenter="options=true" ng-mouseleave="options=false">
-                                            <div style="padding-top:3px;"><i class="glyphicon glyphicon-time"></i>{{todo.reminder | date:'EEE MMM, dd hh:mm:ss a'}}<i class="glyphicon glyphicon-remove-sign" style="float:right;margin-left:10px;" ng-click="deleteReminder(todo.t_id);readTodo()"></i>
+                                            <div style="padding-top:3px;"><i class="glyphicon glyphicon-time"></i>{{todo.reminder | date:'EEE MMM, dd hh:mm:ss a'}}<i class="glyphicon glyphicon-remove-sign" style="float:right;margin-left:10px;" ng-click="deleteReminder(todo.t_id);readTodo()" data-toggle="tooltip" data-placement="bottom" title="delete reminder"></i>
                                             </div>
                                         </div>
                                     </div>

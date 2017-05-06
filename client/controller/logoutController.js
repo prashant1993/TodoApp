@@ -9,5 +9,6 @@ app.controller('logoutController', function($scope, $state, $auth) {
     $auth.logout()
         .then(function() {
             $state.go('login');
+            toastr.success('User logout');
         });
 });

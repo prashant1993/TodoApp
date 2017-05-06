@@ -1,7 +1,7 @@
 /**
  * auth controller
  */
- 
+
 app.controller('authController', function($scope, $location, $auth, $state) {
 //get data from the url
 var authData = $location.search();
@@ -12,10 +12,13 @@ var authData = $location.search();
         })
         .then(function(data) {
             console.log(data);
-            if (data.data.status)
+            if (data.data.status){
                 $state.go("home");
+                  toastr.success('Welcome to the BridgeLabz ToDo');
+                }
             else {
                 $state.go("login");
+                  toastr.error('Login fail ');
             }
         })
         .catch(function(error) {

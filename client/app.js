@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap',  'ui.bootstrap.datetimepicker','moment-picker','toastr']);
+var app = angular.module('myApp', ['ui.router', 'satellizer', 'ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ui.bootstrap.datetimepicker','moment-picker']);
 app.config(function($stateProvider, $urlRouterProvider, $authProvider) {
 
     /**

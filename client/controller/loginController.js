@@ -18,9 +18,9 @@ app.controller('loginController', function($scope, $http, $state, $auth) {
                 console.log(data);
                 if (data.data.status === true) {
                     $state.go("home");
-                    alert("login successfull");
+                  toastr.success('Welcome to the BridgeLabz ToDo');
                 } else {
-                    alert("login fail,plz fill the correct info ");
+                    toastr.error("Login fail,please fill the correct info ");
                 }
             })
             .catch(function(error) {

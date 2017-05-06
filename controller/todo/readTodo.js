@@ -1,7 +1,11 @@
+/**
+ * readTodo controller
+ */
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var todo = require('../../model/Tododb.js');
+
 /* GET  list of todos. */
 router.get('/', function(req, res) {
     todo.find({

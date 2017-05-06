@@ -1,7 +1,12 @@
+/**
+ * Userprofile controller
+ */
+
 var Express = require("express");
 var apiRoutes = Express.Router();
 var User = require("../model/user");
 
+/*GET user detail */
 apiRoutes.get("/", function(req, res) {
     // console.log(req);
     // console.log(req.decoded);

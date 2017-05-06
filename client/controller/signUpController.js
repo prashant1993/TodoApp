@@ -17,11 +17,12 @@ app.controller('signUpController', function($scope, $http, $state, $auth) {
                 method: "POST"
             })
             .then(function(data) {
+
                 if (data.data.status === true) {
-                    alert("user register successfully");
+                      toastr.success("user register successfully");
                     $state.go("login");
                 } else {
-                    alert("fill the correct info");
+                      toastr.error("please fill the correct information");
                     // console.log(data);
                 }
             })

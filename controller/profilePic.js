@@ -1,3 +1,7 @@
+/**
+ * profilePic controller
+ */
+
 var Express = require("express");
 var apiRoutes = Express.Router();
 var User = require("../model/user");
@@ -21,6 +25,7 @@ var upload = multer({
     storage: storage
 }).single('profilePic');
 
+/*POST to upload profile pic*/
 apiRoutes.post('/', function(req, res) {
     upload(req, res, function(err) {
         if (err) {
@@ -32,7 +37,7 @@ apiRoutes.post('/', function(req, res) {
         var updateData = {
             local: {}
         };
-        console.log("hi",req.file);
+        console.log(req.file);
         if (req.file) {
             updateData.local.profile = JSON.stringify([{
                 value: req.file.path

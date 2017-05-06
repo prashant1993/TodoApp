@@ -1,7 +1,11 @@
+/**
+ * createTodo controller
+ */
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var todo = require('../../model/Tododb.js');
+
 /* POST call to create todo */
 router.post('/', function(req, res) {
     try {

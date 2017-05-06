@@ -2,9 +2,6 @@ body {
     background-color: #e8e8e8;
 }
 
-#maindiv{
-  /*overflow-x: hidden;*/
-}
 
 /*login and signup*/
 
@@ -272,8 +269,6 @@ height:1000px;;
     /*display: table-cell;*/
     vertical-align: middle;
     padding: 15px;
-    /*margin-bottom: 10%;*/
-    /*margin-bottom: 10%;*/
 }
 
 .cont.grid .card:hover {
@@ -281,11 +276,9 @@ height:1000px;;
 }
 
 .cont.grid .card {
-    /*display: table-cell;*/
     background: #ffffff;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     margin: 20px;
-    /*margin: 10px;*/
     }
 
 .cont.grid .card>div {

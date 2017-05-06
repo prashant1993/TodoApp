@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
+//schema for todo
 var TodoSchema = new Schema({
     user_id: {
         ref: "user",
@@ -23,6 +24,8 @@ var TodoSchema = new Schema({
         virtuals: true
     }
 });
+
+//create virtual id
 TodoSchema.set('toJSON', {
     transform: function(doc, ret) {
         ret.t_id = ret._id;

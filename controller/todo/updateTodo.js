@@ -1,9 +1,13 @@
+/**
+ * updateTodo controller
+ */
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var todo = require('../../model/Tododb.js');
 
-/* update todo with given todo id */
+
+/* POST call for update todo with given todo id */
 router.post('/:id', function(req, res) {
   console.log(req.body);
     todo.findByIdAndUpdate(req.params.id, req.body, function(err, todos) {

@@ -1,11 +1,13 @@
 /**
  * home controller
  */
-app.controller('homeController', function($scope, $http, $auth, $uibModal, $timeout, $log, $filter, $state,toastr) {
+app.controller('homeController', function($scope, $http, $auth, $uibModal, $timeout, $log, $filter, $state) {
     $scope.newTodo = {};
     $scope.customFilter = function() {
         $scope.todos = $filter("currentDates")($scope.todos);
     };
+
+
 
 
     //drag and drop the cards
@@ -123,6 +125,13 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             .then(function(data) {
                 $scope.newTodo = {}; // clear the form so our user is ready to enter another
                 $scope.todos = data.data;
+                // console.log($scope.todos.msg);
+                if ($scope.todos.msg) {
+                  toastr.error('fill the title and description');
+                }
+                else {
+                  toastr.success('ToDo created successfully');
+                }
                 // $state.reload();
                 // console.log(data);
             })
@@ -148,6 +157,7 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             .then(function(data) {
                 $scope.todos = data.data;
                 $state.reload();
+                toastr.success('ToDo deleted successfully');
                 //console.log(data);
             })
             .catch(function(data) {
@@ -156,7 +166,7 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
     };
 
     /**
-     * @function createreminder - create reminder
+     * @function createReminder - create reminder
      * @param {String} remDate - contain reminder date
      */
 
@@ -206,16 +216,22 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             })
             .then(function(data) {
                 $scope.todo = data.data;
+                toastr.success('Reminder updated successfully');
                 //console.log(data);
             })
             .catch(function(data) {
                 console.log('Error: ' + data);
             });
     };
+    /**
+     * @function deleteReminder - delete reminder
+     * @param {String} reminder - contain reminder as empty
+     *@return success return deleted reminder
+     */
 
     //  delete reminder
     $scope.deleteReminder = function(t_id) {
-        console.log(t_id);
+        // console.log(t_id);
         $scope.reminder = {
             reminder: ""
         };
@@ -227,6 +243,7 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             })
             .then(function(data) {
                 $scope.todo = data.data;
+                toastr.success('Reminder deleted successfully');
                 //console.log(data);
             })
             .catch(function(data) {
@@ -234,14 +251,14 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
             });
     };
 
-    //popup model to update data
+    //popup model to show and update data
     var $ctrl = this;
     $scope.loadModel = function(data) {
         console.log(data);
         var modalInstance = $uibModal.open({
             animation: $ctrl.animationsEnabled,
             templateUrl: 'template/popup.html',
-            controller: function($uibModalInstance, $scope, $state,toastr) {
+            controller: function($uibModalInstance, $scope, $state) {
                 $scope.todo = data;
                 this.cancel = function() {
                     $uibModalInstance.dismiss();
@@ -256,11 +273,17 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
                     };
                 });
 
+
+                /**
+                 * @function updateTodo - update the todo
+                 * @param {String} todo - todo contain title and description
+                 *@return success return the updated todos
+                 */
                 $scope.updateTodo = function(todo) {
                     var title = $('#modal-title').html();
-                    console.log(title);
+                    // console.log(title);
                     var description = $('#modal-body').html();
-                    console.log(description);
+                    // console.log(description);
                     try {
                         if (!title || !description) {
                             throw err;
@@ -278,11 +301,12 @@ app.controller('homeController', function($scope, $http, $auth, $uibModal, $time
                             .then(function(data) {
                                 $state.reload();
                                 $scope.todo = data.data;
-                                toastr.success('Hello world!', 'Toastr fun!');
+                                toastr.success('Updated successfully');
                                 // alert("successfully updated");
-                                console.log(data);
+                                // console.log(data);
                             })
                             .catch(function(data) {
+                              toastr.error(data);
                                 console.log('Error: ' + data);
                             });
                     } catch (e) {
